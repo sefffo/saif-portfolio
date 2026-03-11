@@ -87,6 +87,7 @@ const education = [
     schoolUrl: 'https://www.linkedin.com/school/benhanationaluniversity/posts/?feedView=all',
     period: '2023 – 2027',
     badge: 'GPA: 3.72 / 4.00',
+    current: true,
     highlights: [
       '3rd place in class ranking',
       'Software Engineering specialisation track',
@@ -100,6 +101,7 @@ const education = [
     schoolUrl: 'https://www.linkedin.com/company/routeacademy/posts/?feedView=all',
     period: '2024 – 2025',
     badge: 'Graduated',
+    current: false,
     highlights: [
       'Completed full professional diploma covering both frontend and backend tracks',
       'Frontend: HTML, CSS, JavaScript, TypeScript, Angular',
@@ -126,8 +128,8 @@ export default function About() {
       x: -30, opacity: 0, stagger: 0.09, duration: 0.7, ease: 'power3.out',
       scrollTrigger: { trigger: '.tl-section', start: 'top 78%' },
     })
-    gsap.from('.edu-card', {
-      y: 30, opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power3.out',
+    gsap.from('.edu-item', {
+      x: -30, opacity: 0, stagger: 0.1, duration: 0.7, ease: 'power3.out',
       scrollTrigger: { trigger: '.edu-section', start: 'top 82%' },
     })
     gsap.from('.str-card', {
@@ -137,7 +139,7 @@ export default function About() {
   }, { scope: ref })
 
   return (
-    <section ref={ref} className="page-wrapper pb-40 page-enter">
+    <section ref={ref} className="page-wrapper pb-56 page-enter">
       <div className="max-w-7xl mx-auto pt-16">
 
         <p className="a-reveal section-label mb-4">001 / About</p>
@@ -264,50 +266,60 @@ export default function About() {
           </div>
         </div>
 
-        {/* Education */}
-        <div className="edu-section pb-4">
+        {/* Education Timeline */}
+        <div className="edu-section">
           <p className="section-label mb-12">Education</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {education.map((edu, i) => (
-              <div key={i} className="edu-card card p-7 rounded-lg hover:border-[#7c6aff]/40 transition-all duration-300 flex flex-col gap-5">
+          <div className="relative">
+            <div className="absolute left-[3px] top-2 bottom-0 w-px bg-[#1e2235]" />
+            <div className="flex flex-col gap-14">
+              {education.map((edu, i) => (
+                <div key={i} className="edu-item pl-10 relative">
+                  <div className={`absolute left-0 top-2 w-[7px] h-[7px] rounded-full border ${
+                    edu.current
+                      ? 'border-[#7c6aff] bg-[#7c6aff] shadow-[0_0_8px_#7c6aff66]'
+                      : 'border-[#272d42] bg-[#0d0f14]'
+                  }`} />
 
-                {/* period + badge */}
-                <div className="flex items-center justify-between flex-wrap gap-2">
-                  <p className="text-[10px] tracking-[0.35em] uppercase text-[#272d42]">{edu.period}</p>
-                  <span className="text-[10px] tracking-widest text-[#7c6aff] border border-[#7c6aff]/20 px-2.5 py-1 rounded">{edu.badge}</span>
+                  {edu.current && (
+                    <span className="inline-flex items-center gap-1.5 text-[9px] tracking-[0.3em] uppercase text-[#7c6aff] border border-[#7c6aff]/20 px-2.5 py-1 mb-3 rounded">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#7c6aff] animate-pulse" />Current
+                    </span>
+                  )}
+
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-1.5 mb-4">
+                    <div>
+                      <h3 className="text-white font-bold text-[15px] mb-0.5">{edu.degree}</h3>
+                      <p className="text-[#4b5563] text-sm">{edu.department}</p>
+                    </div>
+                    <span className="text-[10px] tracking-[0.3em] text-[#272d42] uppercase whitespace-nowrap">{edu.period}</span>
+                  </div>
+
+                  {/* school LinkedIn link */}
+                  <a
+                    href={edu.schoolUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 text-[#4b5563] text-xs hover:text-[#a78bfa] transition-colors duration-200 group w-fit mb-4"
+                  >
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" className="opacity-60 group-hover:opacity-100 flex-shrink-0">
+                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                    <span>{edu.school}</span>
+                    <span className="text-[#272d42] group-hover:text-[#7c6aff] transition-colors">↗</span>
+                  </a>
+
+                  <ul className="flex flex-col gap-2.5">
+                    {edu.highlights.map((h, j) => (
+                      <li key={j} className="text-[#4b5563] text-sm leading-[1.8] flex gap-3">
+                        <span className="shrink-0 mt-[9px] w-3 h-px bg-[#7c6aff]" />{h}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <span className="inline-block mt-4 text-[10px] tracking-widest text-[#7c6aff] border border-[#7c6aff]/20 px-2.5 py-1 rounded">{edu.badge}</span>
                 </div>
-
-                {/* degree + department */}
-                <div>
-                  <h3 className="text-white font-bold text-base mb-1">{edu.degree}</h3>
-                  <p className="text-[#6b7280] text-xs tracking-wide">{edu.department}</p>
-                </div>
-
-                {/* school link */}
-                <a
-                  href={edu.schoolUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 text-[#4b5563] text-sm hover:text-[#a78bfa] transition-colors duration-200 group w-fit"
-                >
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" className="opacity-60 group-hover:opacity-100 flex-shrink-0">
-                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                  </svg>
-                  <span className="text-xs">{edu.school}</span>
-                  <span className="text-[#272d42] group-hover:text-[#7c6aff] transition-colors">↗</span>
-                </a>
-
-                {/* highlights */}
-                <ul className="flex flex-col gap-2">
-                  {edu.highlights.map((h, j) => (
-                    <li key={j} className="flex gap-3 text-[#4b5563] text-xs leading-[1.7]">
-                      <span className="text-[#7c6aff] shrink-0">→</span>{h}
-                    </li>
-                  ))}
-                </ul>
-
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
