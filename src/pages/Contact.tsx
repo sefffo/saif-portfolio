@@ -32,13 +32,7 @@ const SOCIALS = [
 
 type Status = 'idle' | 'sending' | 'sent' | 'error'
 
-// ─────────────────────────────────────────────────────────────
-// The key fix: wrapper has relative+padding-top for label space.
-// The input itself also has padding-top so the typed value sits
-// BELOW the floated label, not under it.
-// Label top=0 when lifted (sits at top of wrapper), top=padding-top when resting (sits on the line).
-// ─────────────────────────────────────────────────────────────
-const LABEL_HEIGHT = 18  // px — space reserved above the input line
+const LABEL_HEIGHT = 18
 
 function FloatingInput({
   label, type = 'text', value, onChange, placeholder, required,
@@ -59,13 +53,12 @@ function FloatingInput({
           fontSize:      lifted ? '9px'  : '14px',
           letterSpacing: lifted ? '0.4em': '0',
           textTransform: lifted ? 'uppercase' : 'none',
-          color:         focused ? '#7c6aff' : '#4b5563',
+          color:         focused ? '#8b7cf8' : '#4e4a6a',
           transform:     lifted ? 'none' : 'translateY(-1px)',
         }}
       >
         {label}
       </label>
-
       <input
         type={type}
         required={required}
@@ -74,16 +67,15 @@ function FloatingInput({
         placeholder={focused ? placeholder : ''}
         onFocus={() => setFocused(true)}
         onBlur={()  => setFocused(false)}
-        className="w-full bg-transparent text-[#e8eaf0] text-sm focus:outline-none transition-colors py-2"
-        style={{ borderBottom: `1.5px solid ${focused ? '#7c6aff' : '#1e2235'}` }}
+        className="w-full bg-transparent text-[var(--fg)] text-sm focus:outline-none transition-colors py-2"
+        style={{ borderBottom: `1.5px solid ${focused ? '#8b7cf8' : 'var(--border)'}` }}
       />
-
       <div
         className="absolute bottom-0 left-0 h-[1.5px] transition-all duration-300"
         style={{
           width:      focused ? '100%' : '0%',
-          background: 'linear-gradient(90deg, #7c6aff, #a78bfa)',
-          boxShadow:  '0 0 8px #7c6aff66',
+          background: 'linear-gradient(90deg, #8b7cf8, #c4b5fd)',
+          boxShadow:  '0 0 8px #8b7cf866',
         }}
       />
     </div>
@@ -109,13 +101,12 @@ function FloatingTextarea({
           fontSize:      lifted ? '9px'  : '14px',
           letterSpacing: lifted ? '0.4em': '0',
           textTransform: lifted ? 'uppercase' : 'none',
-          color:         focused ? '#7c6aff' : '#4b5563',
+          color:         focused ? '#8b7cf8' : '#4e4a6a',
           transform:     lifted ? 'none' : 'translateY(-1px)',
         }}
       >
         {label}
       </label>
-
       <textarea
         rows={rows}
         required={required}
@@ -124,16 +115,15 @@ function FloatingTextarea({
         placeholder={focused ? placeholder : ''}
         onFocus={() => setFocused(true)}
         onBlur={()  => setFocused(false)}
-        className="w-full bg-transparent text-[#e8eaf0] text-sm focus:outline-none resize-none transition-colors py-2"
-        style={{ borderBottom: `1.5px solid ${focused ? '#7c6aff' : '#1e2235'}` }}
+        className="w-full bg-transparent text-[var(--fg)] text-sm focus:outline-none resize-none transition-colors py-2"
+        style={{ borderBottom: `1.5px solid ${focused ? '#8b7cf8' : 'var(--border)'}` }}
       />
-
       <div
         className="absolute bottom-0 left-0 h-[1.5px] transition-all duration-300"
         style={{
           width:      focused ? '100%' : '0%',
-          background: 'linear-gradient(90deg, #7c6aff, #a78bfa)',
-          boxShadow:  '0 0 8px #7c6aff66',
+          background: 'linear-gradient(90deg, #8b7cf8, #c4b5fd)',
+          boxShadow:  '0 0 8px #8b7cf866',
         }}
       />
     </div>
@@ -193,38 +183,28 @@ export default function Contact() {
       className="page-enter flex flex-col lg:flex-row"
       style={{ minHeight: '100vh', paddingTop: 'var(--nav-height)' }}
     >
-
-      {/* ══ LEFT PANEL ══ */}
+      {/* LEFT PANEL */}
       <div
         className="relative lg:w-[42%] flex flex-col justify-between overflow-hidden"
         style={{
           padding: 'clamp(2rem, 5vw, 5rem)',
           background: 'linear-gradient(160deg, #12151d 0%, #0d0f14 60%, #0a0b10 100%)',
-          // border-bottom on mobile, border-right on desktop
-          borderBottom: '1px solid #1e2235',
+          borderBottom: '1px solid var(--border)',
         }}
       >
-        {/* keep border-right on lg+ via inline override isn't possible in Tailwind inline,
-            so we use a pseudo via a positioned div */}
-        <div
-          className="hidden lg:block absolute right-0 top-0 bottom-0 w-px"
-          style={{ background: '#1e2235' }}
-        />
-
-        {/* glow blobs */}
+        <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-px" style={{ background: 'var(--border)' }} />
         <div className="pointer-events-none absolute -top-32 -left-32 w-96 h-96 rounded-full"
-          style={{ background: 'radial-gradient(circle, #7c6aff18 0%, transparent 70%)' }} />
+          style={{ background: 'radial-gradient(circle, #8b7cf818 0%, transparent 70%)' }} />
         <div className="pointer-events-none absolute bottom-0 right-0 w-72 h-72 rounded-full"
-          style={{ background: 'radial-gradient(circle, #a78bfa0e 0%, transparent 70%)' }} />
+          style={{ background: 'radial-gradient(circle, #c4b5fd0e 0%, transparent 70%)' }} />
 
-        {/* content */}
         <div>
           <p className="cl-tag section-label mb-8">004 / Contact</p>
           <h1 className="cl-title font-black uppercase leading-[0.85] tracking-tight text-white mb-6"
             style={{ fontSize: 'clamp(3rem, 6vw, 6rem)' }}>
             Let&rsquo;s<br /><span className="grad-text">Talk.</span>
           </h1>
-          <p className="cl-sub text-[#4b5563] text-sm leading-relaxed max-w-xs mb-10">
+          <p className="cl-sub text-[var(--muted)] text-sm leading-relaxed max-w-xs mb-10">
             Open to full-time roles, freelance projects, internships, and collaborations.
             Based in Cairo &mdash; available remotely worldwide.
           </p>
@@ -235,16 +215,16 @@ export default function Contact() {
                 target={s.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer"
                 className="cl-social group flex items-center gap-4"
               >
-                <span className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 bg-[#1e2235] text-[#374151] group-hover:bg-[#7c6aff]/20 group-hover:text-[#a78bfa] transition-all duration-300">
+                <span className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 bg-[var(--surface)] text-[var(--dim)] group-hover:bg-[var(--accent)]/20 group-hover:text-[var(--accent2)] transition-all duration-300">
                   {s.icon}
                 </span>
                 <div className="flex-1 min-w-0">
-                  <p className="text-[10px] tracking-[0.3em] uppercase text-[#374151] mb-0.5">{s.label}</p>
-                  <p className="text-[#9ca3af] text-sm truncate group-hover:text-white transition-colors duration-200">{s.handle}</p>
+                  <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--dim)] mb-0.5">{s.label}</p>
+                  <p className="text-[var(--muted)] text-sm truncate group-hover:text-[var(--fg)] transition-colors duration-200">{s.handle}</p>
                 </div>
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                   strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                  className="flex-shrink-0 text-[#1e2235] group-hover:text-[#7c6aff] transition-all duration-200 opacity-0 group-hover:opacity-100">
+                  className="flex-shrink-0 text-[var(--border2)] group-hover:text-[var(--accent)] transition-all duration-200 opacity-0 group-hover:opacity-100">
                   <path d="M7 17 17 7M7 7h10v10"/>
                 </svg>
               </a>
@@ -252,18 +232,18 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* bottom */}
         <div className="mt-12">
           <div className="flex items-center gap-3 mb-5">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#22c55e] opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#22c55e]" />
             </span>
-            <span className="text-[10px] tracking-[0.3em] uppercase text-[#4b5563]">Available for work</span>
+            <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--dim)]">Available for work</span>
           </div>
           <div className="glow-line mb-5" />
-          <a href="/Saif-Lotfy_CV.pdf" download="Saif-Lotfy_CV.pdf"
-            className="cv-btn inline-flex items-center gap-3 border border-[#7c6aff]/30 text-[#a78bfa] text-[10px] tracking-[0.3em] uppercase font-bold px-5 py-3 rounded-lg hover:bg-[#7c6aff] hover:text-white hover:border-[#7c6aff] transition-all duration-300">
+          {/* ✔ FIXED: href now matches the actual filename in /public */}
+          <a href="/Saif%20Lotfy_CV.pdf" download="Saif-Lotfy_CV.pdf"
+            className="cv-btn inline-flex items-center gap-3 border border-[var(--accent)]/30 text-[var(--accent2)] text-[10px] tracking-[0.3em] uppercase font-bold px-5 py-3 rounded-lg hover:bg-[var(--accent)] hover:text-white hover:border-[var(--accent)] transition-all duration-300">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
               <polyline points="7 10 12 15 17 10"/>
@@ -274,27 +254,26 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* ══ RIGHT PANEL ══ */}
+      {/* RIGHT PANEL */}
       <div
         className="flex-1 flex items-start lg:items-center justify-center"
-        style={{ padding: 'clamp(2rem, 5vw, 5rem)', background: '#0d0f14' }}
+        style={{ padding: 'clamp(2rem, 5vw, 5rem)', background: 'var(--bg)' }}
       >
         <div className="cr-inner w-full max-w-lg">
-
           {status === 'sent' ? (
             <div className="flex flex-col items-center justify-center gap-6 py-16 text-center">
               <div className="w-20 h-20 rounded-full flex items-center justify-center"
-                style={{ background: '#7c6aff14', border: '1px solid #7c6aff44', boxShadow: '0 0 40px #7c6aff22' }}>
+                style={{ background: '#8b7cf814', border: '1px solid #8b7cf844', boxShadow: '0 0 40px #8b7cf822' }}>
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-                  <path d="M5 13l4 4L19 7" stroke="#7c6aff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M5 13l4 4L19 7" stroke="#8b7cf8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
               <div>
-                <p className="text-white font-black text-3xl uppercase tracking-tight mb-3">Message Sent! ✉️</p>
-                <p className="text-[#4b5563] text-sm">I’ll get back to you as soon as possible.</p>
+                <p className="text-[var(--fg)] font-black text-3xl uppercase tracking-tight mb-3">Message Sent! ✉️</p>
+                <p className="text-[var(--muted)] text-sm">I’ll get back to you as soon as possible.</p>
               </div>
               <button onClick={() => setStatus('idle')}
-                className="mt-2 text-[10px] tracking-[0.35em] uppercase text-[#374151] hover:text-[#7c6aff] transition-colors">
+                className="mt-2 text-[10px] tracking-[0.35em] uppercase text-[var(--dim)] hover:text-[var(--accent)] transition-colors">
                 Send another →
               </button>
             </div>
@@ -302,13 +281,12 @@ export default function Contact() {
             <>
               <div className="mb-10">
                 <p className="section-label mb-3">Get in touch</p>
-                <h2 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight">
+                <h2 className="text-3xl md:text-4xl font-black text-[var(--fg)] uppercase tracking-tight">
                   Send a <span className="grad-text">Message</span>
                 </h2>
               </div>
 
               <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-8" noValidate>
-
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                   <FloatingInput
                     label="Name" value={form.name} placeholder="Your full name" required
@@ -333,42 +311,35 @@ export default function Contact() {
                   </p>
                 )}
 
-                {/* send button */}
                 <button
                   ref={btnRef}
                   type="submit"
                   disabled={status === 'sending'}
                   className="group relative w-full overflow-hidden rounded-xl flex items-center justify-between disabled:opacity-60 transition-all duration-300 active:scale-[0.99]"
                   style={{
-                    background: 'linear-gradient(135deg, #7c6aff, #6c5ce7)',
+                    background: 'linear-gradient(135deg, #8b7cf8, #7c6aff)',
                     padding: '13px 18px',
-                    boxShadow: '0 4px 20px #7c6aff33',
+                    boxShadow: '0 4px 20px #8b7cf833',
                   }}
                 >
                   <span className="pointer-events-none absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-
                   <span className="text-white font-bold text-sm uppercase tracking-[0.25em]">
                     {status === 'sending' ? 'Sending...' : 'Send Message'}
                   </span>
-
                   <span className="relative w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-white/20 transition-colors duration-300">
                     {status === 'sending' ? (
                       <span className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
                     ) : (
-                      <svg
-                        ref={planeRef}
-                        width="15" height="15" viewBox="0 0 24 24"
+                      <svg ref={planeRef} width="15" height="15" viewBox="0 0 24 24"
                         fill="none" stroke="white" strokeWidth="2"
                         strokeLinecap="round" strokeLinejoin="round"
-                        style={{ transformOrigin: 'center' }}
-                      >
+                        style={{ transformOrigin: 'center' }}>
                         <path d="m22 2-7 20-4-9-9-4 20-7z"/>
                         <path d="M22 2 11 13"/>
                       </svg>
                     )}
                   </span>
                 </button>
-
               </form>
             </>
           )}

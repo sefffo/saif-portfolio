@@ -23,7 +23,6 @@ const stats = [
   { num: '29+',  label: 'Technologies'  },
 ]
 
-// Floating chips — positioned around the 3D canvas
 const chips = [
   { text: 'ASP.NET Core',     top: '18%', right: '28%' },
   { text: 'Microservices',    top: '30%', right: '6%'  },
@@ -46,7 +45,6 @@ export default function Home() {
       .from('.h-scroll', { opacity: 0, y: 8, duration: 0.4 }, '-=0.2')
       .from('.hero-chip', { opacity: 0, y: 15, stagger: 0.12, duration: 0.5, ease: 'power2.out' }, '-=0.3')
 
-    // Chips float up/down continuously
     gsap.utils.toArray<HTMLElement>('.hero-chip').forEach((el, i) => {
       gsap.to(el, {
         y: `${-8 - i * 3}px`,
@@ -75,9 +73,8 @@ export default function Home() {
   return (
     <main ref={ref} className="overflow-x-hidden">
 
-      {/* ── HERO ── */}
+      {/* HERO */}
       <section className="relative w-full h-screen flex items-center overflow-hidden">
-
         <div className="relative z-10 w-full md:w-[55%] px-6 md:px-10 lg:px-16 flex flex-col justify-center">
 
           <div className="h-tag flex items-center gap-3 mb-10">
@@ -119,8 +116,8 @@ export default function Home() {
               About Me
             </Link>
             <a
-              href="/Saif-Lotfy_CV.pdf"
-              download
+              href="/Saif%20Lotfy_CV.pdf"
+              download="Saif-Lotfy_CV.pdf"
               className="h-cta cv-btn px-7 py-3 border border-[#7c6aff]/50 text-[#a78bfa] text-[11px] tracking-[0.2em] uppercase font-semibold hover:bg-[#7c6aff] hover:text-white transition-all duration-300 rounded flex items-center gap-2"
             >
               <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3M1 10h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
@@ -153,7 +150,7 @@ export default function Home() {
           </Canvas>
         </div>
 
-        {/* Floating tech chips (above canvas) */}
+        {/* Floating chips */}
         <div className="hidden md:block absolute inset-0 pointer-events-none z-20">
           {chips.map((chip) => (
             <div key={chip.text} className="hero-chip"
@@ -164,23 +161,20 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Blend */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#0d0f14] via-[#0d0f14]/80 to-transparent pointer-events-none z-[1]" />
 
-        {/* Scroll indicator */}
         <div className="h-scroll absolute bottom-10 left-6 md:left-10 lg:left-16 flex flex-col items-center gap-3 z-10">
           <div className="w-px h-14 bg-gradient-to-b from-transparent to-[#374151]" />
           <span className="text-[9px] tracking-[0.4em] text-[#2a3045] uppercase">Scroll</span>
         </div>
 
-        {/* Available badge */}
         <div className="absolute bottom-10 right-6 md:right-10 z-10 hidden md:flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse" />
           <span className="text-[10px] tracking-[0.3em] text-[#374151] uppercase">Available for hire</span>
         </div>
       </section>
 
-      {/* ── MARQUEE ── */}
+      {/* MARQUEE */}
       <div className="border-y border-[#1e2235] py-4 overflow-hidden">
         <div className="marquee-track">
           {[
@@ -198,13 +192,13 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ── PAGE PREVIEWS ── */}
+      {/* PAGE PREVIEWS */}
       <section className="prev-section max-w-7xl mx-auto px-6 md:px-10 lg:px-16 py-28">
         <div className="prev-heading flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div>
             <p className="section-label mb-4">Explore</p>
             <h2 className="text-3xl md:text-5xl font-black text-white uppercase leading-tight">
-              What’s Inside<br />
+              What's Inside<br />
               <span className="grad-text">This Portfolio.</span>
             </h2>
           </div>
@@ -233,7 +227,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── STATS ── */}
+      {/* STATS */}
       <section className="stats-section border-t border-[#1e2235]">
         <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 py-20 grid grid-cols-2 md:grid-cols-4 gap-10">
           {stats.map(({ num, label }) => (
