@@ -34,7 +34,7 @@ body {
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
 
-/* ── Nav links ── */
+/* nav links */
 .nav-link {
   position: relative;
   font-size: 11px;
@@ -57,21 +57,29 @@ body {
 .nav-link.active       { color: #fff; }
 .nav-link.active::after{ width: 100%; }
 
-/* ── Page wrapper ── */
+/* Page top padding to clear fixed nav */
 .page-wrapper {
   padding-top: var(--nav-height);
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+@media (min-width: 768px) {
+  .page-wrapper { padding-left: 2.5rem; padding-right: 2.5rem; }
+}
+@media (min-width: 1024px) {
+  .page-wrapper { padding-left: 4rem; padding-right: 4rem; }
 }
 
-/* ── Page transition ── */
+/* Page transition */
 .page-enter {
-  animation: pageIn 0.5s cubic-bezier(0.4,0,0.2,1) forwards;
+  animation: pageIn 0.45s cubic-bezier(0.4,0,0.2,1) forwards;
 }
 @keyframes pageIn {
-  from { opacity: 0; transform: translateY(18px); }
+  from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Cards ── */
+/* Cards */
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -82,7 +90,7 @@ body {
   background: var(--surface2);
 }
 
-/* ── Section label ── */
+/* Section label */
 .section-label {
   font-size: 10px;
   letter-spacing: 0.45em;
@@ -90,7 +98,7 @@ body {
   color: var(--dim);
 }
 
-/* ── Accent dot ── */
+/* Accent dot */
 .accent-dot {
   display: inline-block;
   width: 6px; height: 6px;
@@ -100,7 +108,7 @@ body {
   flex-shrink: 0;
 }
 
-/* ── Gradient text ── */
+/* Gradient text */
 .grad-text {
   background: linear-gradient(135deg, #a78bfa, #7c6aff);
   -webkit-background-clip: text;
@@ -108,7 +116,7 @@ body {
   background-clip: text;
 }
 
-/* ── Skill pill ── */
+/* Skill pill — no GSAP initial hidden state, all visible by default */
 .skill-pill {
   display: inline-flex;
   align-items: center;
@@ -122,6 +130,8 @@ body {
   transition: all 0.25s ease;
   cursor: default;
   white-space: nowrap;
+  opacity: 1;
+  transform: none;
 }
 .skill-pill:hover {
   border-color: var(--accent);
@@ -131,14 +141,14 @@ body {
   transform: translateY(-2px);
 }
 .skill-pill .dot {
-  width: 7px; height: 7px;
+  width: 6px; height: 6px;
   border-radius: 50%;
-  background: var(--accent);
-  opacity: 0.5;
+  flex-shrink: 0;
+  opacity: 0.6;
 }
 .skill-pill:hover .dot { opacity: 1; }
 
-/* ── Tag pill ── */
+/* Tag */
 .tag {
   font-size: 10px;
   letter-spacing: 0.2em;
@@ -151,7 +161,7 @@ body {
 }
 .tag:hover { border-color: var(--accent); color: var(--accent); }
 
-/* ── Marquee ── */
+/* Marquee */
 .marquee-track {
   display: flex;
   gap: 2.5rem;
@@ -163,21 +173,30 @@ body {
   to   { transform: translateX(-50%); }
 }
 
-/* ── CV button pulse ── */
+/* CV button pulse */
 @keyframes pulseBorder {
   0%,100% { box-shadow: 0 0 0 0 var(--glow); }
   50%     { box-shadow: 0 0 0 6px transparent; }
 }
 .cv-btn { animation: pulseBorder 2.8s ease infinite; }
 
-/* ── Glow line ── */
+/* Glow line */
 .glow-line {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--accent), transparent);
   opacity: 0.15;
 }
 
-/* ── Hero floating chip ── */
+/* Proficiency bar */
+.prof-bar {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #7c6aff, #a78bfa);
+  box-shadow: 0 0 8px #7c6aff55;
+}
+
+/* Hero floating chip */
 .hero-chip {
   position: absolute;
   display: flex;
@@ -192,6 +211,7 @@ body {
   white-space: nowrap;
   pointer-events: none;
   user-select: none;
+  opacity: 1;
 }
 .hero-chip .c-dot {
   width: 6px; height: 6px;

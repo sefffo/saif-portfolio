@@ -7,40 +7,29 @@ gsap.registerPlugin(ScrollTrigger)
 
 const experience = [
   {
-    role: 'Team Lead — National University Portal',
+    role: 'Team Lead & Backend Developer — National University Portal',
     company: 'Production Project',
     location: 'Egypt',
     period: '2026 – Present',
     current: true,
     points: [
-      'Managing a dev team building a production student portal system to modernize university portals across Egypt — launching soon 🚀',
-      'Responsible for system architecture, sprint planning, code reviews, task delegation, and delivery',
-      'Applying full Agile/SDLC: backlog grooming, sprint retrospectives, stakeholder communication',
-      'Microservices backend with ASP.NET Core + Clean Architecture, Angular frontend, SQL Server',
+      'Leading a dev team AND building the backend simultaneously — architecting a production student portal system to modernize university portals across Egypt',
+      'Full SDLC ownership: Jira sprints, Slack team comms, GitHub Actions + Jenkins CI/CD, backlog grooming, code reviews, and delivery',
+      'Backend: ASP.NET Core + Clean Architecture microservices; Frontend: Angular; Data: SQL Server',
+      'Designed to scale across multiple Egyptian universities — launching soon 🚀',
     ],
   },
   {
     role: '.NET Backend Developer Intern',
-    company: 'Code Way',
+    company: 'Code Way (LMS Platform)',
     location: 'Cairo, Egypt',
     period: 'Nov 2025 – Present',
     current: true,
     points: [
-      'Design and develop backend microservices for a production LMS using .NET 9, ASP.NET Core, Clean Architecture',
-      'Contributed ~50% of all services: Identity, Course, Certificate, Content, and ongoing Payment Service',
+      'Designing and building backend microservices for a production LMS using .NET 9, ASP.NET Core, and Clean Architecture',
+      'Contributed ~50% of all services: Identity (JWT/OAuth2), Course, Certificate, Content, and active Payment Service (Paymob)',
       'Real-time features via SignalR + WebSockets; Redis caching for high-performance reads',
-      'SQL Server + MongoDB with EF Core, LINQ, Redis — all running in production',
-    ],
-  },
-  {
-    role: 'Computer Vision Intern',
-    company: 'NAID — National Academy of IT for Persons with Disabilities',
-    location: 'Cairo, Egypt',
-    period: '2025',
-    current: false,
-    points: [
-      'Worked on computer vision projects at a government-backed technology academy focused on digital inclusion and ICT',
-      'Gained hands-on experience with CV techniques and Python-based image processing pipelines',
+      'SQL Server + MongoDB with EF Core + LINQ — all running in production serving real users',
     ],
   },
   {
@@ -50,9 +39,20 @@ const experience = [
     period: 'Sep 2025 – Present',
     current: true,
     points: [
-      'Teach HTML, CSS, JavaScript, and Angular to students aged 10–18 through structured labs and interactive lessons',
-      'Design full curriculum from fundamentals to real project builds with measurable skill progression',
-      'Developed strong communication skills — breaking down complex technical concepts for any audience',
+      'Teaching HTML, CSS, JavaScript, and Angular to students aged 10–18 through structured labs and interactive coding lessons',
+      'Designed full curriculum from fundamentals to real project builds with measurable skill progression',
+      'Developed strong communication and teaching skills — able to break down complex technical concepts for any audience',
+    ],
+  },
+  {
+    role: 'Computer Vision Intern',
+    company: 'NAID — National Academy of IT for Persons with Disabilities',
+    location: 'Cairo, Egypt',
+    period: '2025',
+    current: false,
+    points: [
+      'Worked on computer vision projects at a government-backed academy focused on digital inclusion and ICT accessibility',
+      'Hands-on experience with CV techniques: Python, OpenCV, image processing pipelines',
     ],
   },
   {
@@ -74,7 +74,7 @@ const experience = [
     period: '2024',
     current: false,
     points: [
-      'Competed in ICPC, strengthening algorithm design, data structures, and problem-solving under timed pressure',
+      'Competed in ICPC — strengthened algorithm design, data structures, and competitive programming under timed pressure',
     ],
   },
 ]
@@ -95,12 +95,12 @@ const education = [
 ]
 
 const strengths = [
-  { title: 'System Design',        desc: 'Designing scalable microservices and Clean Architecture systems from scratch.' },
-  { title: 'Project Management',   desc: 'Agile sprint planning, team coordination, backlog grooming, SDLC delivery.' },
-  { title: 'Team Leadership',      desc: 'Currently leading a production team building a nation-scale student portal.' },
-  { title: 'Teaching & Mentoring', desc: 'Teaching code to ages 10–18 at Savvy School — curriculum design and clarity.' },
-  { title: 'Problem Solving',      desc: 'ICPC background with strong algorithms and data structures foundation.' },
-  { title: 'Full-Stack Fluency',   desc: 'Backend-first but capable across Angular, Node.js, REST, and deployment.' },
+  { title: 'System Design',        desc: 'Designing scalable microservices and Clean Architecture systems from the ground up.' },
+  { title: 'Project Management',   desc: 'Agile sprint planning, Jira, Slack, Jenkins, GitHub Actions, backlog grooming, SDLC delivery.' },
+  { title: 'Team Leadership',      desc: 'Currently leading a production team building a portal for Egyptian universities.' },
+  { title: 'Teaching & Mentoring', desc: 'Teaching code to ages 10–18 at Savvy School — curriculum design and clear communication.' },
+  { title: 'Problem Solving',      desc: 'ICPC background with a strong algorithms and data structures foundation.' },
+  { title: 'Full-Stack Fluency',   desc: 'Backend-first but capable across Angular, Node.js, React, REST, and deployment.' },
 ]
 
 export default function About() {
@@ -123,8 +123,8 @@ export default function About() {
   }, { scope: ref })
 
   return (
-    <div ref={ref} className="page-wrapper pb-28 page-enter">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 pt-16">
+    <section ref={ref} className="page-wrapper pb-28 page-enter">
+      <div className="max-w-7xl mx-auto pt-16">
 
         <p className="a-reveal section-label mb-4">001 / About</p>
         <h1 className="a-reveal text-5xl md:text-7xl font-black text-white uppercase leading-[0.9] tracking-tight mb-4">
@@ -137,30 +137,34 @@ export default function About() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mb-28">
           <div>
-            <div className="a-reveal relative w-48 h-60 card rounded-lg mb-10 overflow-hidden group cursor-pointer">
+            <div className="a-reveal relative w-44 h-56 card rounded-lg mb-10 overflow-hidden group cursor-pointer">
               <img src="/your-photo.jpg" alt="Saif Lotfy"
                 className="w-full h-full object-cover grayscale opacity-50 group-hover:opacity-90 group-hover:grayscale-0 transition-all duration-700"
                 onError={(e) => {
                   const el = e.currentTarget as HTMLImageElement
                   el.style.display = 'none'
                   const p = el.parentElement
-                  if (p) p.innerHTML = `<div class="w-full h-full flex flex-col items-center justify-center gap-2"><span class="text-4xl">📷</span><span class="text-[#1e2235] text-[10px] tracking-widest uppercase text-center px-4">Add your-photo.jpg to /public</span></div>`
+                  if (p) p.innerHTML = `<div class="w-full h-full flex flex-col items-center justify-center gap-2"><span class="text-3xl">📷</span><span class="text-[#1e2235] text-[9px] tracking-widest uppercase text-center px-3">Add your-photo.jpg<br/>to /public</span></div>`
                 }}
               />
             </div>
 
             <p className="a-reveal text-[#6b7280] text-sm leading-[1.9] mb-4">
-              Backend engineer with deep focus on .NET 9, ASP.NET Core, microservices, and maintainable code.
-              Built production systems at Code Way, contributed 50% of a live LMS microservices platform,
-              and currently lead a team building a portal that will reshape student systems across Egypt.
+              Backend engineer focused on .NET 9, ASP.NET Core, microservices, and maintainable systems.
+              Built production systems at Code Way (contributed 50% of a live LMS), Computer Vision intern at NAID,
+              and currently leading + building the backend for a portal launching across Egyptian universities.
             </p>
             <p className="a-reveal text-[#4b5563] text-sm leading-[1.9] mb-8">
-              Outside engineering, I teach programming at Savvy Programming School and completed a Computer
-              Vision internship at NAID. Strong communicator, Agile practitioner, and team leader.
+              Also a Front-End Instructor at Savvy Programming School teaching Angular and JavaScript to students aged 10–18.
+              ICPC competitor. GPA 3.72. Strong communicator, Agile practitioner, and hands-on team lead.
             </p>
 
             <div className="a-reveal flex flex-wrap gap-2">
-              {['Cairo 🇪🇬','GPA 3.72','Open to Work','C1 English','Team Lead','ICPC Competitor','CV @NAID'].map(tag => (
+              {[
+                'Cairo 🇪🇬', 'GPA 3.72', 'Open to Work',
+                'C1 English', 'Team Lead', 'ICPC 2024',
+                'CV @NAID', 'Instructor @Savvy', 'Backend @Code Way',
+              ].map(tag => (
                 <span key={tag} className="tag">{tag}</span>
               ))}
             </div>
@@ -168,16 +172,17 @@ export default function About() {
 
           <div className="flex flex-col gap-4">
             {[
-              { label: 'Location',      value: 'Cairo, Egypt'                              },
-              { label: 'Primary Role',  value: '.NET Backend Developer'                    },
-              { label: 'Core Stack',    value: 'ASP.NET Core · C# · SQL Server · Redis'    },
-              { label: 'Frontend',      value: 'Angular 17 · TypeScript · Tailwind'        },
-              { label: 'Also',          value: 'Node.js · Python · Computer Vision'        },
-              { label: 'Architecture',  value: 'Clean Arch · Microservices · SOLID'        },
-              { label: 'Also Known As', value: 'Instructor · Team Lead · ICPC'             },
-              { label: 'Education',     value: 'B.Sc. CS — Benha National University'      },
-              { label: 'GPA',           value: '3.72 / 4.00'                               },
-              { label: 'Languages',     value: 'Arabic (Native) · English (C1)'            },
+              { label: 'Location',      value: 'Cairo, Egypt'                                     },
+              { label: 'Primary Role',  value: '.NET Backend Developer'                           },
+              { label: 'Core Stack',    value: 'ASP.NET Core · C# 13 · SQL Server · Redis'       },
+              { label: 'Architecture',  value: 'Clean Arch · Microservices · SOLID · DDD'         },
+              { label: 'Frontend',      value: 'Angular 17 · TypeScript · RxJS · NgRx'            },
+              { label: 'Also',          value: 'Node.js · Python · Computer Vision'               },
+              { label: 'CI/CD & Tools', value: 'GitHub Actions · Jenkins · Docker · Jira · Slack' },
+              { label: 'Roles',         value: 'Team Lead · Backend Dev · Instructor · ICPC'      },
+              { label: 'Education',     value: 'B.Sc. CS — Benha National University'             },
+              { label: 'GPA',           value: '3.72 / 4.00'                                      },
+              { label: 'Languages',     value: 'Arabic (Native) · English (C1)'                  },
             ].map(item => (
               <div key={item.label} className="flex justify-between items-start border-b border-[#1e2235] pb-3.5 group">
                 <span className="text-[10px] tracking-[0.3em] uppercase text-[#272d42] min-w-[140px] group-hover:text-[#374151] transition-colors">{item.label}</span>
@@ -187,7 +192,7 @@ export default function About() {
           </div>
         </div>
 
-        {/* Timeline */}
+        {/* Experience Timeline */}
         <div className="tl-section mb-28">
           <p className="section-label mb-12">Professional Experience</p>
           <div className="relative">
@@ -260,6 +265,6 @@ export default function About() {
         </div>
 
       </div>
-    </div>
+    </section>
   )
 }

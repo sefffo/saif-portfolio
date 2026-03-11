@@ -18,8 +18,8 @@ export default function Contact() {
   }, { scope: ref })
 
   return (
-    <div ref={ref} className="page-wrapper pb-28 page-enter">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 pt-16">
+    <section ref={ref} className="page-wrapper pb-28 page-enter">
+      <div className="max-w-7xl mx-auto pt-16">
 
         <p className="c-reveal section-label mb-4">004 / Contact</p>
         <h1 className="c-reveal text-5xl md:text-7xl font-black text-white uppercase leading-[0.9] tracking-tight mb-4">
@@ -49,8 +49,8 @@ export default function Contact() {
             ) : (
               <form onSubmit={(e) => { e.preventDefault(); setSent(true) }} className="flex flex-col gap-5">
                 {[
-                  { id: 'name',  label: 'Name',  type: 'text',  placeholder: 'Your name'       },
-                  { id: 'email', label: 'Email', type: 'email', placeholder: 'your@email.com'  },
+                  { id: 'name',  label: 'Name',    type: 'text',  placeholder: 'Your name'       },
+                  { id: 'email', label: 'Email',   type: 'email', placeholder: 'your@email.com'  },
                 ].map(f => (
                   <div key={f.id}>
                     <label htmlFor={f.id} className="text-[10px] tracking-[0.3em] uppercase text-[#374151] block mb-2">{f.label}</label>
@@ -84,8 +84,7 @@ export default function Contact() {
                 <span className="text-[#272d42] group-hover:text-[#7c6aff] transition-colors text-lg">↗</span>
               </a>
             ))}
-
-            <a href="/Saif-Lotfy_CV.pdf" download
+            <a href="/Saif-Lotfy_CV.pdf" download="Saif-Lotfy_CV.pdf"
               className="cv-btn mt-2 bg-[#7c6aff] text-white text-[11px] tracking-[0.2em] uppercase font-bold py-4 rounded text-center hover:bg-[#6c5ce7] transition-colors duration-300 flex items-center justify-center gap-2">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3M1 10h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
               Download Resume
@@ -93,6 +92,6 @@ export default function Contact() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }

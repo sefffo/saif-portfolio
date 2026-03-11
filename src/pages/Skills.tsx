@@ -7,149 +7,120 @@ gsap.registerPlugin(ScrollTrigger)
 
 const categories = [
   {
-    label: 'Backend & .NET',
+    label: 'Languages',
     color: '#7c6aff',
+    skills: ['C', 'C++', 'C# 13', 'JavaScript', 'TypeScript', 'Python', 'SQL / T-SQL', 'HTML', 'CSS', 'SCSS'],
+  },
+  {
+    label: 'Backend & .NET',
+    color: '#a78bfa',
     skills: [
-      '.NET 9', 'ASP.NET Core', 'C# 13', 'EF Core', 'ADO.NET',
-      'Clean Architecture', 'Microservices', 'RESTful APIs',
-      'SignalR', 'WebSockets', 'JWT', 'OAuth2',
+      '.NET 9', 'ASP.NET Core', 'ASP.NET MVC', 'ASP.NET Web API',
+      'Entity Framework Core', 'ADO.NET', 'LINQ',
       'AutoMapper', 'FluentValidation', 'Serilog',
+      'RESTful APIs', 'SignalR', 'WebSockets',
+      'JWT', 'OAuth2', 'Google OAuth2',
+      'Clean Architecture', 'Microservices Architecture',
+      'Repository Pattern', 'Unit of Work', 'Specification Pattern',
     ],
   },
   {
     label: 'Databases',
     color: '#06b6d4',
-    skills: ['SQL Server', 'MongoDB', 'Redis', 'PostgreSQL', 'LINQ', 'EF Migrations'],
+    skills: ['SQL Server', 'MongoDB', 'Redis', 'PostgreSQL', 'EF Core Migrations', 'LINQ Queries', 'Stored Procedures'],
   },
   {
     label: 'Frontend',
     color: '#f59e0b',
     skills: [
-      'Angular 17', 'TypeScript', 'RxJS', 'NgRx', 'Signals',
-      'React', 'Tailwind CSS', 'Angular Material', 'Bootstrap', 'Flowbite',
+      'Angular 17', 'RxJS', 'NgRx', 'Signals', 'Interceptors', 'Lazy Loading',
+      'Angular Material', 'Bootstrap', 'Tailwind CSS', 'Flowbite',
+      'React', 'React Router', 'TypeScript',
     ],
   },
   {
-    label: 'Node.js & Languages',
-    color: '#22c55e',
-    skills: ['Node.js', 'JavaScript', 'Python', 'C++', 'C', 'SQL / T-SQL', 'HTML', 'CSS / SCSS'],
-  },
-  {
-    label: 'Architecture & CS',
+    label: 'CS Fundamentals & Architecture',
     color: '#ec4899',
     skills: [
-      'SOLID Principles', 'Design Patterns', 'DDD',
       'OOP', 'Functional Programming',
-      'Data Structures', 'Algorithms', 'System Design',
+      'Data Structures', 'Algorithms', 'Complexity Analysis',
+      'SOLID Principles', 'Design Patterns', 'DDD', 'System Design',
+      'Competitive Programming',
     ],
   },
   {
-    label: 'Tools & DevOps',
-    color: '#f97316',
-    skills: ['Git', 'GitHub', 'Docker', 'Postman', 'Agile', 'SDLC', 'Swagger / OpenAPI', 'DevOps'],
+    label: 'Tools, DevOps & SDLC',
+    color: '#22c55e',
+    skills: [
+      'Git', 'GitHub', 'GitHub Actions',
+      'Jenkins', 'Docker', 'Postman',
+      'Jira', 'Slack', 'Swagger / OpenAPI',
+      'Agile', 'Scrum', 'SDLC', 'DevOps',
+    ],
   },
   {
-    label: 'AI & Vision',
-    color: '#a78bfa',
-    skills: ['Computer Vision', 'Python ML', 'Image Processing'],
+    label: 'AI & Computer Vision',
+    color: '#f97316',
+    skills: ['Computer Vision', 'Image Processing', 'Python ML', 'NumPy', 'OpenCV'],
   },
-]
-
-const proficiency = [
-  { name: '.NET 9 / ASP.NET Core', pct: 90 },
-  { name: 'C# 13',                 pct: 90 },
-  { name: 'Clean Architecture',    pct: 88 },
-  { name: 'RESTful APIs',          pct: 92 },
-  { name: 'SQL Server',            pct: 88 },
-  { name: 'Angular 17',            pct: 80 },
-  { name: 'TypeScript',            pct: 80 },
-  { name: 'Redis',                 pct: 78 },
-  { name: 'Microservices',         pct: 82 },
-  { name: 'Docker',                pct: 72 },
-  { name: 'Node.js',               pct: 68 },
-  { name: 'Python',                pct: 70 },
 ]
 
 export default function Skills() {
   const ref = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
+    // Only animate the header — not the pills (they are visible by default)
     gsap.from('.sk-h', { y: 40, opacity: 0, stagger: 0.07, duration: 0.75, ease: 'power3.out' })
     gsap.from('.cat-block', {
-      y: 40, opacity: 0, stagger: 0.08, duration: 0.65, ease: 'power3.out',
-      scrollTrigger: { trigger: '.cats-section', start: 'top 82%' },
-    })
-    gsap.from('.prof-row', {
-      x: -30, opacity: 0, stagger: 0.06, duration: 0.6, ease: 'power3.out',
-      scrollTrigger: { trigger: '.prof-section', start: 'top 82%' },
-    })
-    // Animate skill pills on scroll
-    gsap.from('.skill-pill', {
-      scale: 0.85, opacity: 0, stagger: 0.025, duration: 0.4, ease: 'back.out(1.5)',
-      scrollTrigger: { trigger: '.cats-section', start: 'top 75%' },
+      y: 30, opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power3.out',
+      scrollTrigger: { trigger: '.cats-section', start: 'top 85%' },
     })
   }, { scope: ref })
 
   return (
-    <div ref={ref} className="page-wrapper pb-28 page-enter">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 pt-16">
+    <section ref={ref} className="page-wrapper pb-28 page-enter">
+      <div className="max-w-7xl mx-auto pt-16">
 
-        {/* Header */}
         <p className="sk-h section-label mb-4">002 / Skills</p>
         <h1 className="sk-h text-5xl md:text-7xl font-black text-white uppercase leading-[0.9] tracking-tight mb-4">
           Tech <span className="grad-text">Stack.</span>
         </h1>
-        <p className="sk-h text-[#6b7280] text-sm mb-16 max-w-lg leading-relaxed">
-          29+ technologies across backend, frontend, databases, Node.js, and CS fundamentals.
-          Hover to explore.
+        <p className="sk-h text-[#6b7280] text-sm mb-16 max-w-xl leading-relaxed">
+          Every technology I've actively used — across backend, frontend, databases, systems, and tooling.
+          Hover any pill to highlight it.
         </p>
 
-        {/* Skill pills by category */}
-        <div className="cats-section flex flex-col gap-10 mb-24">
+        <div className="cats-section flex flex-col gap-12">
           {categories.map((cat) => (
             <div key={cat.label} className="cat-block">
+              {/* Category header */}
               <div className="flex items-center gap-3 mb-5">
-                <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: cat.color, boxShadow: `0 0 10px ${cat.color}88` }} />
-                <span className="text-[11px] tracking-[0.35em] uppercase font-semibold" style={{ color: cat.color }}>{cat.label}</span>
+                <span
+                  className="w-2 h-2 rounded-full flex-shrink-0"
+                  style={{ background: cat.color, boxShadow: `0 0 10px ${cat.color}88` }}
+                />
+                <span
+                  className="text-[11px] tracking-[0.35em] uppercase font-semibold"
+                  style={{ color: cat.color }}
+                >
+                  {cat.label}
+                </span>
               </div>
-              <div className="flex flex-wrap gap-2.5">
+
+              {/* Pills — flex-wrap, always visible */}
+              <div className="flex flex-wrap gap-2">
                 {cat.skills.map((skill) => (
-                  <div key={skill} className="skill-pill">
-                    <span className="dot" />
+                  <span key={skill} className="skill-pill">
+                    <span className="dot" style={{ background: cat.color }} />
                     {skill}
-                  </div>
+                  </span>
                 ))}
               </div>
             </div>
           ))}
         </div>
 
-        {/* Proficiency bars for top skills */}
-        <div className="prof-section">
-          <p className="section-label mb-10">Core Proficiency</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-6">
-            {proficiency.map((item) => (
-              <div key={item.name} className="prof-row">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-sm text-[#9ca3af]">{item.name}</span>
-                  <span className="text-[11px] text-[#374151]">{item.pct}%</span>
-                </div>
-                <div className="relative h-[3px] bg-[#1e2235] rounded-full overflow-hidden">
-                  <div
-                    className="absolute left-0 top-0 bottom-0 rounded-full"
-                    style={{
-                      width: `${item.pct}%`,
-                      background: `linear-gradient(90deg, #7c6aff, #a78bfa)`,
-                      boxShadow: '0 0 8px #7c6aff66',
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
       </div>
-    </div>
+    </section>
   )
 }
