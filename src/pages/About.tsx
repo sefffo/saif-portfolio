@@ -10,7 +10,7 @@ const experience = [
     role: 'Team Lead & Backend Developer — National University Portal',
     company: 'Production Project',
     location: 'Egypt',
-    period: '2026 – 2027',
+    period: '2026 – Present',
     current: true,
     points: [
       'Leading a dev team AND building the backend simultaneously — architecting a production student portal system to modernize university portals across Egypt',
@@ -23,7 +23,7 @@ const experience = [
     role: '.NET Backend Developer Intern',
     company: 'Code Way (LMS Platform)',
     location: 'Cairo, Egypt',
-    period: 'Nov 2025 – 2027',
+    period: 'Nov 2025 – Present',
     current: true,
     points: [
       'Designing and building backend microservices for a production LMS using ASP.NET Core and Clean Architecture',
@@ -36,7 +36,7 @@ const experience = [
     role: 'Front-End Instructor',
     company: 'Savvy Programming School',
     location: 'Cairo, Egypt',
-    period: 'Sep 2025 – 2027',
+    period: 'Sep 2025 – Present',
     current: true,
     points: [
       'Teaching HTML, CSS, JavaScript, and Angular to students aged 10–18 through structured labs and interactive coding lessons',
