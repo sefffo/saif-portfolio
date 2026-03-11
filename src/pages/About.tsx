@@ -138,7 +138,7 @@ export default function About() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mb-28">
           <div>
             <div className="a-reveal relative w-44 h-56 card rounded-lg mb-10 overflow-hidden group cursor-pointer">
-              <img src="/your-photo.jpg" alt="Saif Lotfy"
+              <img src="/saif.jpg" alt="Saif Lotfy"
                 className="w-full h-full object-cover grayscale opacity-50 group-hover:opacity-90 group-hover:grayscale-0 transition-all duration-700"
                 onError={(e) => {
                   const el = e.currentTarget as HTMLImageElement
