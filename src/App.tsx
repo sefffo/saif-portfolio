@@ -1,20 +1,27 @@
-import useScrollAnimation from "./components/hooks/useScrollAnimation"
-import Hero from "./components/sections/Hero"
-import About from "./components/sections/About"
-import Skills from "./components/sections/Skills"
-import Projects from "./components/sections/Projects"
-import Contact from "./components/sections/Contact"
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Home from './pages/Home'
+import About from './pages/About'
+import Skills from './pages/Skills'
+import Projects from './pages/Projects'
+import Contact from './pages/Contact'
+import useScrollAnimation from './hooks/useScrollAnimation'
 
 export default function App() {
   useScrollAnimation()
 
   return (
-    <main className="bg-[#0a0a0a] overflow-hidden">
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Contact />
-    </main>
+    <BrowserRouter>
+      <div className="bg-[#0a0a0a] min-h-screen overflow-x-hidden">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/skills" element={<Skills />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   )
 }
