@@ -3,23 +3,17 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  /* ── Midnight Violet palette ───────────────────────────────────────────────
-     bg/surface: deeper blue-black (not flat grey)
-     fg:         bright #f4f1ff — warm white with the slightest violet tint,
-                 much higher contrast than the old #e8eaf0
-     body text:  #c9c4e0 — readable lavender-white for paragraphs
-     muted:      #7c7899 — visible, not invisible
-     dim:        #4e4a6a — used for labels / section numbers
-     accent:     #8b7cf8 — slightly softer violet (less neon)
-     accent2:    #c4b5fd — light lavender for highlights
+  /* ── Midnight Violet palette (softer text version) ─────────────────────────
+     The previous fg was too close to white for the vibe.
+     New text colors are warmer + dimmer, still readable.
   ─────────────────────────────────────────────────────────────────────────── */
   --bg:         #0a0a0f;
   --surface:    #111118;
-  --surface2:   #17172200;
-  --fg:         #f4f1ff;
-  --body:       #c9c4e0;
-  --muted:      #7c7899;
-  --dim:        #4e4a6a;
+  --surface2:   #171722;
+  --fg:         #ddd6f3;
+  --body:       #b9b2d0;
+  --muted:      #8b84a3;
+  --dim:        #5a5473;
   --accent:     #8b7cf8;
   --accent2:    #c4b5fd;
   --glow:       #8b7cf844;
@@ -37,11 +31,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Paragraphs and body copy use --body so they're readable but not blinding */
-p, li, span:not(.grad-text):not(.section-label) {
-  color: inherit;
-}
-
 .font-display { font-family: 'Syne', sans-serif; }
 
 ::selection { background: var(--accent); color: #fff; }
@@ -50,7 +39,6 @@ p, li, span:not(.grad-text):not(.section-label) {
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
 
-/* nav links */
 .nav-link {
   position: relative;
   font-size: 11px;
@@ -73,7 +61,6 @@ p, li, span:not(.grad-text):not(.section-label) {
 .nav-link.active       { color: var(--fg); }
 .nav-link.active::after{ width: 100%; }
 
-/* Page top padding to clear fixed nav */
 .page-wrapper {
   padding-top: var(--nav-height);
   padding-left: 1.5rem;
@@ -86,7 +73,6 @@ p, li, span:not(.grad-text):not(.section-label) {
   .page-wrapper { padding-left: 4rem; padding-right: 4rem; }
 }
 
-/* Page transition */
 .page-enter {
   animation: pageIn 0.45s cubic-bezier(0.4,0,0.2,1) forwards;
 }
@@ -95,7 +81,6 @@ p, li, span:not(.grad-text):not(.section-label) {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Cards */
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -106,7 +91,6 @@ p, li, span:not(.grad-text):not(.section-label) {
   background: var(--surface2);
 }
 
-/* Section label */
 .section-label {
   font-size: 10px;
   letter-spacing: 0.45em;
@@ -114,7 +98,6 @@ p, li, span:not(.grad-text):not(.section-label) {
   color: var(--dim);
 }
 
-/* Accent dot */
 .accent-dot {
   display: inline-block;
   width: 6px; height: 6px;
@@ -124,7 +107,6 @@ p, li, span:not(.grad-text):not(.section-label) {
   flex-shrink: 0;
 }
 
-/* Gradient text */
 .grad-text {
   background: linear-gradient(135deg, #c4b5fd, #8b7cf8);
   -webkit-background-clip: text;
@@ -132,7 +114,6 @@ p, li, span:not(.grad-text):not(.section-label) {
   background-clip: text;
 }
 
-/* Skill pill */
 .skill-pill {
   display: inline-flex;
   align-items: center;
@@ -164,7 +145,6 @@ p, li, span:not(.grad-text):not(.section-label) {
 }
 .skill-pill:hover .dot { opacity: 1; }
 
-/* Tag */
 .tag {
   font-size: 10px;
   letter-spacing: 0.2em;
@@ -177,7 +157,6 @@ p, li, span:not(.grad-text):not(.section-label) {
 }
 .tag:hover { border-color: var(--accent); color: var(--accent2); }
 
-/* Marquee */
 .marquee-track {
   display: flex;
   gap: 2.5rem;
@@ -189,21 +168,18 @@ p, li, span:not(.grad-text):not(.section-label) {
   to   { transform: translateX(-50%); }
 }
 
-/* CV button pulse */
 @keyframes pulseBorder {
   0%,100% { box-shadow: 0 0 0 0 var(--glow); }
   50%     { box-shadow: 0 0 0 6px transparent; }
 }
 .cv-btn { animation: pulseBorder 2.8s ease infinite; }
 
-/* Glow line */
 .glow-line {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--accent), transparent);
   opacity: 0.2;
 }
 
-/* Proficiency bar */
 .prof-bar {
   position: absolute;
   left: 0; top: 0; bottom: 0;
@@ -212,7 +188,6 @@ p, li, span:not(.grad-text):not(.section-label) {
   box-shadow: 0 0 8px #8b7cf855;
 }
 
-/* Hero floating chip */
 .hero-chip {
   position: absolute;
   display: flex;
