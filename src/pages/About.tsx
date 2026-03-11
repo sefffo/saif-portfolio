@@ -139,7 +139,7 @@ export default function About() {
   }, { scope: ref })
 
   return (
-    <section ref={ref} className="page-wrapper pb-56 page-enter">
+    <section ref={ref} className="page-wrapper pb-64 page-enter">
       <div className="max-w-7xl mx-auto pt-16">
 
         <p className="a-reveal section-label mb-4">001 / About</p>
@@ -267,7 +267,7 @@ export default function About() {
         </div>
 
         {/* Education Timeline */}
-        <div className="edu-section">
+        <div className="edu-section mb-28">
           <p className="section-label mb-12">Education</p>
           <div className="relative">
             <div className="absolute left-[3px] top-2 bottom-0 w-px bg-[#1e2235]" />
@@ -286,7 +286,7 @@ export default function About() {
                     </span>
                   )}
 
-                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-1.5 mb-4">
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-1.5 mb-3">
                     <div>
                       <h3 className="text-white font-bold text-[15px] mb-0.5">{edu.degree}</h3>
                       <p className="text-[#4b5563] text-sm">{edu.department}</p>
@@ -294,19 +294,21 @@ export default function About() {
                     <span className="text-[10px] tracking-[0.3em] text-[#272d42] uppercase whitespace-nowrap">{edu.period}</span>
                   </div>
 
-                  {/* school LinkedIn link */}
-                  <a
-                    href={edu.schoolUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 text-[#4b5563] text-xs hover:text-[#a78bfa] transition-colors duration-200 group w-fit mb-4"
-                  >
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" className="opacity-60 group-hover:opacity-100 flex-shrink-0">
-                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                    </svg>
-                    <span>{edu.school}</span>
-                    <span className="text-[#272d42] group-hover:text-[#7c6aff] transition-colors">↗</span>
-                  </a>
+                  {/* school LinkedIn link — aligned with title, not indented extra */}
+                  <div className="mb-4">
+                    <a
+                      href={edu.schoolUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 text-[#4b5563] text-xs hover:text-[#a78bfa] transition-colors duration-200 group"
+                    >
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" className="opacity-50 group-hover:opacity-100 flex-shrink-0">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                      </svg>
+                      <span>{edu.school}</span>
+                      <span className="text-[#272d42] group-hover:text-[#7c6aff] transition-colors">↗</span>
+                    </a>
+                  </div>
 
                   <ul className="flex flex-col gap-2.5">
                     {edu.highlights.map((h, j) => (
@@ -316,7 +318,7 @@ export default function About() {
                     ))}
                   </ul>
 
-                  <span className="inline-block mt-4 text-[10px] tracking-widest text-[#7c6aff] border border-[#7c6aff]/20 px-2.5 py-1 rounded">{edu.badge}</span>
+                  <span className="inline-block mt-5 text-[10px] tracking-widest text-[#7c6aff] border border-[#7c6aff]/20 px-2.5 py-1 rounded">{edu.badge}</span>
                 </div>
               ))}
             </div>
