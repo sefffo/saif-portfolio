@@ -3,10 +3,6 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  /* ── Midnight Violet palette (softer text version) ─────────────────────────
-     The previous fg was too close to white for the vibe.
-     New text colors are warmer + dimmer, still readable.
-  ─────────────────────────────────────────────────────────────────────────── */
   --bg:         #0a0a0f;
   --surface:    #111118;
   --surface2:   #171722;
@@ -61,10 +57,18 @@ body {
 .nav-link.active       { color: var(--fg); }
 .nav-link.active::after{ width: 100%; }
 
+/* ── Page container ─────────────────────────────────────────────────────────────────────────
+   max-width + margin:auto centers content on all screen sizes.
+   padding-left/right ensures breathing room on smaller screens.
+─────────────────────────────────────────────────────────────────────────── */
 .page-wrapper {
   padding-top: var(--nav-height);
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 @media (min-width: 768px) {
   .page-wrapper { padding-left: 2.5rem; padding-right: 2.5rem; }
