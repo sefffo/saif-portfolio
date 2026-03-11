@@ -9,266 +9,319 @@ const projects = [
   {
     number: '01',
     status: 'In Progress',
-    title: 'LMS Microservices Platform',
-    subtitle: 'Backend — Code Way Internship Project',
+    title: 'National University Portal',
+    subtitle: 'Team Lead — Production System · ASP.NET Core · Angular · Microservices',
     description:
-      'Production-grade Learning Management System built as a microservices architecture at Code Way. I personally contributed ~50% of all services — including Identity, Course, Certificate generation, Content management, and the currently active Payment Service. Real production code shipping to real users.',
+      'A production-level student portal system designed to modernize and transform university student portals across Egypt. I lead the development team through full SDLC — from requirements, architecture, sprint planning, to deployment. Launching soon.',
+    tech: ['ASP.NET Core', 'Clean Architecture', 'Microservices', 'Angular', 'SQL Server', 'Docker', 'JWT', 'Agile'],
+    github: '',
+    live: '',
+    note: 'In active development — launching soon 🚀',
+    arch: [
+      { layer: 'Student Portal',   desc: 'Registration · Grades · Schedule · Documents', color: '#7c6aff' },
+      { layer: 'Admin Dashboard',  desc: 'Staff · Departments · Reports · Analytics',     color: '#a78bfa' },
+      { layer: 'Microservices API',desc: 'Auth · Notifications · Files · Academic data',  color: '#6b7280' },
+      { layer: 'Infrastructure',   desc: 'SQL Server · Cloud hosting · CI/CD',            color: '#374151' },
+    ],
+    highlights: [
+      'Leading a full development team — architecture, sprints, code reviews, delivery',
+      'Designed to scale across multiple Egyptian universities',
+      'Microservices-oriented backend with ASP.NET Core and Clean Architecture',
+      'Full SDLC: requirements → design → implementation → QA → deployment',
+      'Applying Agile: backlog grooming, sprint planning, retrospectives',
+    ],
+  },
+  {
+    number: '02',
+    status: 'In Progress',
+    title: 'Microservices E-Commerce',
+    subtitle: 'Backend · ASP.NET Core · Microservices Architecture',
+    description:
+      'A full microservices e-commerce platform built with .NET 9 and ASP.NET Core. Each domain runs as an independent service with its own database, communicating via message brokers and REST. Built with real-world architecture patterns.',
+    tech: ['.NET 9', 'ASP.NET Core', 'Microservices', 'SQL Server', 'RabbitMQ', 'Redis', 'Docker', 'JWT', 'API Gateway', 'Clean Architecture'],
+    github: 'https://github.com/sefffo/Micoservices-ECommerce-Project',
+    live: '',
+    note: '',
+    arch: [
+      { layer: 'API Gateway',        desc: 'Routing · Auth middleware · Load balancing',      color: '#7c6aff' },
+      { layer: 'Identity Service',   desc: 'JWT · OAuth2 · Roles · User management',          color: '#a78bfa' },
+      { layer: 'Product Service',    desc: 'Catalog · Inventory · Pricing · Search',           color: '#6b7280' },
+      { layer: 'Order Service',      desc: 'Orders · Cart · Checkout · Payments',              color: '#4b5563' },
+      { layer: 'Message Bus',        desc: 'RabbitMQ · Async events · Service decoupling',     color: '#374151' },
+      { layer: 'Data Layer',         desc: 'SQL Server · Redis cache · MongoDB',               color: '#1f2434' },
+    ],
+    highlights: [
+      'Each service independently deployable with its own DB (Database per Service pattern)',
+      'API Gateway handles routing, rate limiting, and JWT validation',
+      'Async inter-service communication via RabbitMQ message broker',
+      'Docker Compose for local orchestration of all services',
+      'Clean Architecture within each service — Domain → Application → Infrastructure',
+    ],
+  },
+  {
+    number: '03',
+    status: 'Complete',
+    title: 'E-Commerce API + Dashboard',
+    subtitle: 'Backend · ASP.NET Core · Clean Architecture · Admin Dashboard',
+    description:
+      'Production-grade RESTful API with strict Clean Architecture (Domain → Application → Infrastructure → API). Full authentication with JWT and Google OAuth2, role-based authorization, and a complete admin dashboard for managing products, orders, users, and analytics.',
+    tech: ['ASP.NET Core', 'C#', 'EF Core', 'SQL Server', 'Redis', 'JWT', 'Google OAuth2', 'Clean Architecture', 'AutoMapper', 'FluentValidation'],
+    github: 'https://github.com/sefffo/ECommerce.Web-API',
+    live: '',
+    note: '',
+    arch: [
+      { layer: 'API + Admin Dashboard', desc: 'Controllers · Swagger · Role-based views',         color: '#7c6aff' },
+      { layer: 'Application Layer',     desc: 'Services · DTOs · AutoMapper · FluentValidation',  color: '#a78bfa' },
+      { layer: 'Infrastructure Layer',  desc: 'EF Core · Redis · Repos · External services',      color: '#6b7280' },
+      { layer: 'Domain Layer',          desc: 'Entities · Interfaces · Business rules',            color: '#374151' },
+    ],
+    highlights: [
+      'JWT + Google OAuth2 with role-based authorization (Admin / Customer)',
+      'Modules: Products, Categories, Cart, Orders, Payments, Delivery, Reviews',
+      'Admin dashboard with product management, order tracking, and analytics',
+      'Redis caching on product catalog for high-frequency reads',
+      'Global exception handler + Serilog logging + full Swagger docs',
+    ],
+  },
+  {
+    number: '04',
+    status: 'In Progress',
+    title: 'LMS Microservices Platform',
+    subtitle: 'Backend — Code Way Internship · .NET 9 · Microservices',
+    description:
+      'Production LMS (Learning Management System) built as microservices at Code Way. I personally contributed ~50% of all services — Identity, Course, Certificate, Content, and the active Payment Service integrating third-party gateways.',
     tech: ['.NET 9', 'ASP.NET Core', 'Microservices', 'SQL Server', 'MongoDB', 'Redis', 'JWT', 'OAuth2', 'SignalR', 'Docker'],
     github: '',
     live: '',
     note: 'Private repo — internship project at Code Way',
     arch: [
-      { layer: 'API Gateway',          desc: 'Routing · Load balancing · Auth middleware',               color: '#e8ff00' },
-      { layer: 'Identity Service',     desc: 'JWT · OAuth2 · Roles · User management',                   color: '#d4e800' },
-      { layer: 'Course Service',       desc: 'Content · Modules · Lessons · Enrollment',                 color: '#aaa' },
-      { layer: 'Certificate Service',  desc: 'PDF generation · Issue tracking · Verification',           color: '#888' },
-      { layer: 'Payment Service 🔧',   desc: 'Payment gateway integration — currently in development',   color: '#e8ff00' },
-      { layer: 'Data Layer',           desc: 'SQL Server · MongoDB · Redis cache',                       color: '#333' },
+      { layer: 'API Gateway',          desc: 'Routing · Load balancing · Auth middleware',        color: '#7c6aff' },
+      { layer: 'Identity Service',     desc: 'JWT · OAuth2 · Roles · User management',            color: '#a78bfa' },
+      { layer: 'Course Service',       desc: 'Content · Modules · Lessons · Enrollment',           color: '#6b7280' },
+      { layer: 'Certificate Service',  desc: 'PDF generation · Issue tracking · Verification',    color: '#4b5563' },
+      { layer: 'Payment Service 🔧',   desc: 'Gateway integration — actively in development',     color: '#7c6aff' },
+      { layer: 'Data Layer',           desc: 'SQL Server · MongoDB · Redis cache',                 color: '#1f2434' },
     ],
     highlights: [
       'Contributed ~50% of all microservices in the system',
       'Built Identity Service with JWT + OAuth2 and full role-based auth',
       'Payment Service: actively integrating third-party payment gateways',
       'Real-time features via SignalR and WebSockets across services',
-      'Redis caching layer for high-performance data reads',
       'Production-level code reviewed and deployed at Code Way',
     ],
   },
   {
-    number: '02',
-    status: 'Complete',
-    title: 'E-Commerce API',
-    subtitle: 'Backend — Clean Architecture · ASP.NET Core',
-    description:
-      'Production-grade RESTful API built with strict Clean Architecture (Domain → Application → Infrastructure → API). Full authentication with JWT and Google OAuth2, role-based authorization, and complete e-commerce modules.',
-    tech: ['ASP.NET Core', 'C#', 'EF Core', 'SQL Server', 'Redis', 'JWT', 'Google OAuth2', 'Clean Architecture', 'AutoMapper', 'FluentValidation'],
-    github: 'https://github.com/sefffo/ECommerce-Web-API',
-    live: '',
-    note: '',
-    arch: [
-      { layer: 'API Layer',            desc: 'Controllers · Middleware · Swagger · DI registration',    color: '#e8ff00' },
-      { layer: 'Application Layer',    desc: 'Services · DTOs · AutoMapper · FluentValidation',         color: '#c8d400' },
-      { layer: 'Infrastructure Layer', desc: 'EF Core · Redis · Repositories · External services',      color: '#888' },
-      { layer: 'Domain Layer',         desc: 'Entities · Interfaces · Value objects · Business rules',  color: '#444' },
-    ],
-    highlights: [
-      'JWT + Google OAuth2 with role-based authorization (Admin/Customer)',
-      'Modules: Products, Categories, Cart, Orders, Payments, Delivery, Reviews',
-      'Redis caching on product catalog for high-frequency reads',
-      'EF Core with LINQ, migrations, pagination, filtering, sorting, search',
-      'Global exception handler + structured Serilog logging + full Swagger docs',
-    ],
-  },
-  {
-    number: '03',
+    number: '05',
     status: 'Complete',
     title: 'E-Commerce Web App',
     subtitle: 'Frontend — Angular 17 · TypeScript · NgRx',
     description:
-      'Full-featured online shopping platform with responsive UI, product catalog, cart, wishlist, and order management. Built with Angular 17 using lazy loading, NgRx state management, RxJS, and HTTP interceptors.',
+      'Full-featured online shopping platform with Angular 17, NgRx state management, lazy loading, RxJS, HTTP interceptors, and full cart/wishlist/order management.',
     tech: ['Angular 17', 'TypeScript', 'RxJS', 'NgRx', 'Tailwind CSS', 'Angular Material', 'HTTP Interceptors'],
     github: 'https://github.com/sefffo/E-commApp',
     live: '',
     note: '',
     arch: [
-      { layer: 'Pages / Views',        desc: 'Product · Cart · Auth · Orders · Profile · Dashboard',   color: '#e8ff00' },
-      { layer: 'State (NgRx)',         desc: 'Actions · Reducers · Selectors · Effects',                color: '#c8d400' },
-      { layer: 'Services Layer',       desc: 'HTTP Interceptors · API Services · Route Guards',         color: '#888' },
-      { layer: 'Shared Modules',       desc: 'Components · Pipes · Directives · Models · Utils',       color: '#444' },
+      { layer: 'Pages / Views',   desc: 'Product · Cart · Auth · Orders · Profile',    color: '#7c6aff' },
+      { layer: 'State (NgRx)',    desc: 'Actions · Reducers · Selectors · Effects',     color: '#a78bfa' },
+      { layer: 'Services Layer',  desc: 'HTTP Interceptors · API Services · Guards',    color: '#6b7280' },
+      { layer: 'Shared Modules',  desc: 'Components · Pipes · Directives · Models',    color: '#374151' },
     ],
     highlights: [
       'Lazy loading for all feature modules — fast initial bundle',
-      'HTTP Interceptors for JWT token injection and centralized error handling',
+      'HTTP Interceptors for JWT injection and centralized error handling',
       'NgRx store for cart, user session, and product state',
       'Reactive forms with full validation and UX feedback',
       'Responsive across all breakpoints with Tailwind + Angular Material',
     ],
   },
   {
-    number: '04',
-    status: 'Coming Soon',
-    title: 'National University Portal',
-    subtitle: 'Team Lead — Production System',
-    description:
-      'A production-level student portal system designed to modernize and transform university student portals across Egypt. Leading a development team through full SDLC — from requirements and architecture to delivery and deployment.',
-    tech: ['ASP.NET Core', 'Clean Architecture', 'Microservices', 'Angular', 'SQL Server', 'Docker', 'Agile'],
-    github: '',
-    live: '',
-    note: 'In active development — launching soon 🚀',
-    arch: [
-      { layer: 'Student Portal',       desc: 'Registration · Grades · Schedule · Documents',            color: '#e8ff00' },
-      { layer: 'Admin Dashboard',      desc: 'Staff · Departments · Reports · Analytics',               color: '#c8d400' },
-      { layer: 'API Layer',            desc: 'Microservices · Auth · Notifications · File handling',    color: '#888' },
-      { layer: 'Infrastructure',       desc: 'SQL Server · Cloud hosting · CI/CD pipeline',             color: '#444' },
-    ],
-    highlights: [
-      'Leading a full development team — architecture, sprints, code reviews',
-      'Applying Agile methodologies: backlog, sprints, retrospectives',
-      'Designed to scale across multiple Egyptian universities',
-      'Full SDLC from requirements gathering to production deployment',
-      'Will replace outdated student management systems currently in use',
-    ],
-  },
-  {
-    number: '05',
+    number: '06',
     status: 'Complete',
     title: 'This Portfolio',
     subtitle: 'Frontend — React · Three.js · GSAP',
     description:
-      'Personal portfolio built from scratch with React, TypeScript, Three.js (R3F), GSAP scroll animations, and Lenis smooth scroll. Editorial black & white design with 3D scenes, grain texture overlay, and Tailwind v4.',
+      'Personal portfolio built with React, TypeScript, Three.js (R3F), GSAP ScrollTrigger animations, and Lenis smooth scroll.',
     tech: ['React', 'TypeScript', 'Three.js', 'R3F', 'GSAP', 'Lenis', 'Tailwind v4', 'React Router v7'],
     github: 'https://github.com/sefffo/saif-portfolio',
     live: '',
     note: '',
     arch: [
-      { layer: 'Pages',                desc: 'Home · About · Skills · Projects · Contact',              color: '#e8ff00' },
-      { layer: 'Canvas (R3F)',         desc: 'HeroScene · FloatingParticles · SkillsCube',              color: '#c8d400' },
-      { layer: 'Animations',          desc: 'GSAP ScrollTrigger · Framer Motion · Lenis',              color: '#888' },
-      { layer: 'Styling',             desc: 'Tailwind v4 · CSS Variables · Grain overlay',             color: '#444' },
+      { layer: 'Pages',         desc: 'Home · About · Skills · Projects · Contact', color: '#7c6aff' },
+      { layer: 'Canvas (R3F)',  desc: 'HeroScene · FloatingParticles',               color: '#a78bfa' },
+      { layer: 'Animations',   desc: 'GSAP ScrollTrigger · Lenis',                  color: '#6b7280' },
+      { layer: 'Styling',      desc: 'Tailwind v4 · CSS Variables',                 color: '#374151' },
     ],
     highlights: [
       '3D distorted sphere with Three.js MeshDistortMaterial + floating particles',
       'GSAP ScrollTrigger for per-section scroll-in animations',
-      'Lenis smooth scroll synced with GSAP ticker for perfect timing',
-      'React Router v7 multi-page SPA with page transition animations',
-      'Mobile-responsive with full-screen overlay hamburger nav',
+      'Lenis smooth scroll synced with GSAP ticker',
+      'React Router v7 multi-page SPA with transition animations',
+    ],
+  },
+  {
+    number: '07',
+    status: 'Academic',
+    title: 'RAID Storage Simulator',
+    subtitle: 'University Project — Python · Systems',
+    description:
+      'Simulates RAID 0, 1, and 5 configurations with disk performance calculations, fault tolerance, read/write throughput analysis, and storage efficiency metrics.',
+    tech: ['Python', 'Data Structures', 'Systems Design'],
+    github: '',
+    live: '',
+    note: 'University academic project',
+    arch: [
+      { layer: 'RAID 0', desc: 'Striping — max performance, no redundancy',         color: '#7c6aff' },
+      { layer: 'RAID 1', desc: 'Mirroring — full redundancy, 50% usable space',     color: '#6b7280' },
+      { layer: 'RAID 5', desc: 'Striping + parity — balance of speed + fault tol.', color: '#374151' },
+    ],
+    highlights: [
+      'Simulates disk I/O, throughput calculations, and RAID parity logic',
+      'RAID 5 parity computation using XOR logic across drive stripes',
+      'Visual comparison of storage efficiency per RAID configuration',
+    ],
+  },
+  {
+    number: '08',
+    status: 'Academic',
+    title: 'Tic-Tac-Toe AI',
+    subtitle: 'University Project — Algorithms · C++',
+    description:
+      'Tic-Tac-Toe game with three AI implementations: Minimax algorithm, Alpha-Beta pruning optimization, and a heuristic-based greedy agent. Demonstrates algorithm performance comparison.',
+    tech: ['C++', 'Minimax', 'Alpha-Beta Pruning', 'AI Algorithms'],
+    github: '',
+    live: '',
+    note: 'University academic project',
+    arch: [
+      { layer: 'Minimax',         desc: 'Full game tree search — optimal but slow',       color: '#7c6aff' },
+      { layer: 'Alpha-Beta',      desc: 'Pruning on Minimax — same result, 2-3× faster',  color: '#6b7280' },
+      { layer: 'Greedy Heuristic',desc: 'Fast approximate agent — good, not perfect',      color: '#374151' },
+    ],
+    highlights: [
+      'Minimax guarantees optimal play by exhaustively exploring the game tree',
+      'Alpha-Beta pruning cuts branches that cannot affect final decision',
+      'Performance benchmark comparing all three agents across board states',
     ],
   },
 ]
 
 const statusColor: Record<string, string> = {
-  'In Progress': '#e8ff00',
+  'In Progress': '#7c6aff',
   'Complete':    '#4ade80',
-  'Coming Soon': '#818cf8',
+  'Coming Soon': '#a78bfa',
+  'Academic':    '#6b7280',
 }
 
 export default function Projects() {
   const ref = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
-    gsap.from('.proj-header', { y: 40, opacity: 0, stagger: 0.08, duration: 0.8, ease: 'power3.out' })
-    gsap.from('.project-block', {
-      y: 70, opacity: 0, stagger: 0.15, duration: 0.85, ease: 'power3.out',
-      scrollTrigger: { trigger: '.projects-list', start: 'top 82%' },
+    gsap.from('.ph', { y: 40, opacity: 0, stagger: 0.08, duration: 0.8, ease: 'power3.out' })
+    gsap.from('.pb', {
+      y: 60, opacity: 0, stagger: 0.12, duration: 0.8, ease: 'power3.out',
+      scrollTrigger: { trigger: '.pl', start: 'top 82%' },
     })
   }, { scope: ref })
 
   return (
-    <div ref={ref} className="pt-32 pb-28 px-8 md:px-16 lg:px-24 page-enter">
-      <p className="proj-header section-label mb-5">003 / Projects</p>
-      <h1 className="proj-header text-5xl md:text-7xl lg:text-8xl font-black text-white uppercase leading-[0.9] tracking-tight mb-5">
-        Selected<br /><span className="text-[#e8ff00]">Work.</span>
-      </h1>
-      <p className="proj-header text-[#444] text-sm mb-20 max-w-xl leading-relaxed">
-        Real systems with real architecture — from internship production code to solo projects.
-        Every repo listed has a GitHub link. Every unlisted project has a reason.
-      </p>
+    <div ref={ref} className="pt-32 pb-28 page-enter">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16">
 
-      <div className="projects-list flex flex-col gap-28">
-        {projects.map((project) => (
-          <div key={project.number} className="project-block">
-            {/* Divider with number */}
-            <div className="flex items-center gap-5 mb-10">
-              <span className="text-[#1a1a1a] font-black text-6xl leading-none">{project.number}</span>
-              <div className="flex-1 h-px bg-[#1a1a1a]" />
-              <span
-                className="text-[9px] tracking-[0.35em] uppercase px-3 py-1.5 border"
-                style={{ color: statusColor[project.status], borderColor: `${statusColor[project.status]}33` }}
-              >
-                {project.status}
-              </span>
-            </div>
+        <p className="ph section-label mb-5">003 / Projects</p>
+        <h1 className="ph text-5xl md:text-7xl font-black text-white uppercase leading-[0.9] tracking-tight mb-5">
+          Selected <span className="grad-text">Work.</span>
+        </h1>
+        <p className="ph text-[#6b7280] text-sm mb-20 max-w-xl leading-relaxed">
+          Real systems with real architecture — from production internship code to solo projects and academic work.
+        </p>
 
-            {/* Title row */}
-            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-8">
-              <div>
-                <h2 className="text-2xl md:text-3xl font-black text-white mb-1">{project.title}</h2>
-                <p className="text-[10px] tracking-[0.3em] text-[#444] uppercase">{project.subtitle}</p>
+        <div className="pl flex flex-col gap-28">
+          {projects.map((p) => (
+            <div key={p.number} className="pb">
+
+              {/* Number + status */}
+              <div className="flex items-center gap-5 mb-10">
+                <span className="text-[#1f2434] font-black text-6xl leading-none">{p.number}</span>
+                <div className="flex-1 h-px bg-[#1f2434]" />
+                <span className="text-[9px] tracking-[0.35em] uppercase px-3 py-1.5 border rounded"
+                  style={{ color: statusColor[p.status], borderColor: `${statusColor[p.status]}33` }}>
+                  {p.status}
+                </span>
               </div>
-              <div className="flex flex-wrap gap-3">
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-[10px] tracking-[0.25em] uppercase border border-[#2a2a2a] text-[#777] px-4 py-2.5 hover:border-white hover:text-white transition-all duration-300 flex items-center gap-2"
-                  >
-                    GitHub ↗
-                  </a>
-                )}
-                {project.live && (
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-[10px] tracking-[0.25em] uppercase border border-[#e8ff00] text-[#e8ff00] px-4 py-2.5 hover:bg-[#e8ff00] hover:text-black transition-all duration-300"
-                  >
-                    Live ↗
-                  </a>
-                )}
-                {project.note && (
-                  <span className="text-[10px] tracking-[0.2em] text-[#333] border border-[#1a1a1a] px-4 py-2.5 italic">
-                    {project.note}
-                  </span>
-                )}
-              </div>
-            </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
-              {/* Left — description + highlights + tags */}
-              <div className="lg:col-span-3">
-                <p className="text-[#555] text-sm leading-[1.9] mb-8">{project.description}</p>
-
-                <p className="text-[10px] tracking-[0.4em] uppercase text-[#2a2a2a] mb-5">Key Features</p>
-                <ul className="flex flex-col gap-3 mb-10">
-                  {project.highlights.map((h, i) => (
-                    <li key={i} className="flex gap-4 text-sm text-[#4a4a4a] leading-[1.8]">
-                      <span className="text-[#e8ff00] shrink-0 mt-1">→</span>
-                      {h}
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map(t => (
-                    <span key={t} className="text-[10px] tracking-[0.25em] uppercase border border-[#1a1a1a] text-[#2e2e2e] px-3 py-1.5 hover:border-[#333] hover:text-[#555] transition-all duration-200">
-                      {t}
-                    </span>
-                  ))}
+              {/* Title + links */}
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-8">
+                <div>
+                  <h2 className="text-2xl md:text-3xl font-black text-white mb-1">{p.title}</h2>
+                  <p className="text-[10px] tracking-[0.3em] text-[#374151] uppercase">{p.subtitle}</p>
+                </div>
+                <div className="flex flex-wrap gap-3">
+                  {p.github && (
+                    <a href={p.github} target="_blank" rel="noreferrer"
+                      className="text-[10px] tracking-[0.2em] uppercase border border-[#1f2434] text-[#6b7280] px-4 py-2.5 hover:border-[#7c6aff] hover:text-[#a78bfa] transition-all duration-300 flex items-center gap-2 rounded">
+                      GitHub ↗
+                    </a>
+                  )}
+                  {p.live && (
+                    <a href={p.live} target="_blank" rel="noreferrer"
+                      className="text-[10px] tracking-[0.2em] uppercase bg-[#7c6aff] text-white px-4 py-2.5 hover:bg-[#6c5ce7] transition-all duration-300 rounded">
+                      Live ↗
+                    </a>
+                  )}
+                  {p.note && (
+                    <span className="text-[10px] tracking-[0.2em] text-[#374151] border border-[#1f2434] px-4 py-2.5 italic rounded">{p.note}</span>
+                  )}
                 </div>
               </div>
 
-              {/* Right — Architecture diagram */}
-              <div className="lg:col-span-2">
-                <p className="text-[10px] tracking-[0.4em] uppercase text-[#2a2a2a] mb-5">Architecture</p>
-                <div className="flex flex-col gap-1.5">
-                  {project.arch.map((layer, i) => (
-                    <div
-                      key={layer.layer}
-                      className="relative border border-[#151515] p-4 hover:border-[#222] transition-all duration-300 group overflow-hidden"
-                    >
-                      {/* Left accent bar */}
-                      <div
-                        className="absolute left-0 top-0 bottom-0 w-[2px] opacity-60 group-hover:opacity-100 transition-opacity"
-                        style={{ background: layer.color }}
-                      />
-                      <div className="pl-4">
-                        <p className="text-[12px] font-semibold mb-0.5" style={{ color: layer.color }}>
-                          {layer.layer}
-                        </p>
-                        <p className="text-[11px] text-[#333]">{layer.desc}</p>
+              <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
+                {/* Left */}
+                <div className="lg:col-span-3">
+                  <p className="text-[#4b5563] text-sm leading-[1.9] mb-8">{p.description}</p>
+
+                  <p className="text-[10px] tracking-[0.4em] uppercase text-[#2a3045] mb-5">Key Features</p>
+                  <ul className="flex flex-col gap-3 mb-10">
+                    {p.highlights.map((h, i) => (
+                      <li key={i} className="flex gap-4 text-sm text-[#4b5563] leading-[1.8]">
+                        <span className="text-[#7c6aff] shrink-0 mt-1">→</span>
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="flex flex-wrap gap-2">
+                    {p.tech.map(t => (
+                      <span key={t} className="tag rounded">{t}</span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Right — Architecture */}
+                <div className="lg:col-span-2">
+                  <p className="text-[10px] tracking-[0.4em] uppercase text-[#2a3045] mb-5">Architecture</p>
+                  <div className="flex flex-col gap-1.5">
+                    {p.arch.map((layer, i) => (
+                      <div key={layer.layer}
+                        className="relative card p-4 rounded hover:border-[#7c6aff]/30 transition-all duration-300 group overflow-hidden">
+                        <div className="absolute left-0 top-0 bottom-0 w-[2px] opacity-50 group-hover:opacity-100 transition-opacity"
+                          style={{ background: layer.color }} />
+                        <div className="pl-4">
+                          <p className="text-[12px] font-semibold mb-0.5" style={{ color: layer.color }}>{layer.layer}</p>
+                          <p className="text-[11px] text-[#374151]">{layer.desc}</p>
+                        </div>
+                        {i < p.arch.length - 1 && (
+                          <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 text-[#1f2434] text-[10px] z-10">↓</div>
+                        )}
                       </div>
-                      {/* Arrow connector */}
-                      {i < project.arch.length - 1 && (
-                        <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 text-[#1a1a1a] text-[10px] z-10">↓</div>
-                      )}
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
+
+              <div className="glow-line mt-16" />
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   )

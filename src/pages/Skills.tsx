@@ -5,135 +5,131 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const skillGroups = [
+const groups = [
   {
-    category: 'Languages',
-    skills: [
-      { name: 'C#', level: 95 },
-      { name: 'TypeScript / JavaScript', level: 85 },
-      { name: 'C / C++', level: 80 },
-      { name: 'SQL', level: 88 },
-      { name: 'Python', level: 70 },
-      { name: 'HTML / CSS / SCSS', level: 85 },
+    title: 'Backend & .NET',
+    items: [
+      { name: '.NET 9 / ASP.NET Core',    pct: 90 },
+      { name: 'C# 13',                    pct: 90 },
+      { name: 'EF Core + ADO.NET',        pct: 85 },
+      { name: 'Clean Architecture',       pct: 88 },
+      { name: 'Microservices',            pct: 82 },
+      { name: 'RESTful APIs',             pct: 92 },
+      { name: 'SignalR / WebSockets',     pct: 75 },
+      { name: 'JWT / OAuth2',             pct: 85 },
+      { name: 'AutoMapper + FluentVal.',  pct: 80 },
     ],
   },
   {
-    category: 'Backend & .NET',
-    skills: [
-      { name: '.NET 9 / ASP.NET Core', level: 92 },
-      { name: 'ASP.NET MVC / Web API', level: 90 },
-      { name: 'Entity Framework Core', level: 88 },
-      { name: 'SignalR / WebSockets', level: 78 },
-      { name: 'Microservices Architecture', level: 82 },
-      { name: 'Clean Architecture', level: 88 },
-      { name: 'JWT / OAuth2', level: 85 },
-      { name: 'Redis Caching', level: 80 },
-      { name: 'ADO.NET / AutoMapper', level: 82 },
-      { name: 'RESTful APIs', level: 93 },
+    title: 'Databases',
+    items: [
+      { name: 'SQL Server',   pct: 88 },
+      { name: 'MongoDB',      pct: 72 },
+      { name: 'Redis',        pct: 78 },
+      { name: 'PostgreSQL',   pct: 65 },
     ],
   },
   {
-    category: 'Databases',
-    skills: [
-      { name: 'SQL Server', level: 88 },
-      { name: 'MongoDB', level: 75 },
-      { name: 'Redis', level: 78 },
+    title: 'Frontend',
+    items: [
+      { name: 'Angular 17',          pct: 80 },
+      { name: 'TypeScript',          pct: 80 },
+      { name: 'RxJS / NgRx',        pct: 73 },
+      { name: 'React / Next.js',     pct: 65 },
+      { name: 'Tailwind CSS',        pct: 85 },
+      { name: 'Angular Material',    pct: 75 },
     ],
   },
   {
-    category: 'Frontend',
-    skills: [
-      { name: 'Angular 17 (RxJS, NgRx, Signals)', level: 82 },
-      { name: 'React / Vite', level: 75 },
-      { name: 'Tailwind CSS', level: 85 },
-      { name: 'Bootstrap / Angular Material', level: 80 },
+    title: 'Node.js & Other Languages',
+    items: [
+      { name: 'Node.js',     pct: 68 },
+      { name: 'Python',      pct: 70 },
+      { name: 'C / C++',     pct: 75 },
+      { name: 'JavaScript',  pct: 82 },
+      { name: 'SQL / T-SQL', pct: 88 },
     ],
   },
   {
-    category: 'Concepts & Tools',
-    skills: [
-      { name: 'OOP / SOLID / Design Patterns', level: 90 },
-      { name: 'Data Structures & Algorithms', level: 85 },
-      { name: 'Git / GitHub', level: 88 },
-      { name: 'Postman / DevOps', level: 80 },
-      { name: 'Agile / SDLC', level: 78 },
-      { name: 'System Design', level: 80 },
+    title: 'Tools & Practices',
+    items: [
+      { name: 'Git / GitHub',        pct: 90 },
+      { name: 'Docker',              pct: 72 },
+      { name: 'Postman',             pct: 88 },
+      { name: 'Agile / SDLC',        pct: 85 },
+      { name: 'SOLID / DDD',         pct: 80 },
+      { name: 'Design Patterns',     pct: 78 },
+      { name: 'Computer Vision',     pct: 55 },
     ],
   },
 ]
+
+function SkillBar({ pct }: { pct: number }) {
+  const barRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const el = barRef.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) el.classList.add('animated') },
+      { threshold: 0.1 }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+  return (
+    <div className="relative h-px bg-[#1f2434] mt-2">
+      <div
+        ref={barRef}
+        className="skill-bar-fill absolute inset-0"
+        style={{ '--scale': pct / 100 } as React.CSSProperties}
+      />
+    </div>
+  )
+}
 
 export default function Skills() {
   const ref = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
-    gsap.from('.skills-hero', {
-      y: 40, opacity: 0, duration: 0.8, ease: 'power3.out',
-    })
-    gsap.from('.skill-group', {
-      y: 60, opacity: 0, stagger: 0.15, duration: 0.8, ease: 'power3.out',
-      scrollTrigger: { trigger: '.skills-grid', start: 'top 80%' },
+    gsap.from('.sk-h', { y: 40, opacity: 0, stagger: 0.08, duration: 0.75, ease: 'power3.out' })
+    gsap.from('.sk-group', {
+      y: 40, opacity: 0, stagger: 0.1, duration: 0.7, ease: 'power3.out',
+      scrollTrigger: { trigger: '.sk-grid', start: 'top 82%' },
     })
   }, { scope: ref })
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const fills = entry.target.querySelectorAll<HTMLElement>('.skill-bar-fill')
-            fills.forEach(fill => fill.classList.add('animated'))
-          }
-        })
-      },
-      { threshold: 0.2 }
-    )
-    const groups = document.querySelectorAll('.skill-group')
-    groups.forEach(g => observer.observe(g))
-    return () => observer.disconnect()
-  }, [])
-
   return (
-    <div ref={ref} className="pt-28 pb-24 px-8 md:px-20 page-enter">
-      <p className="skills-hero text-[11px] tracking-[0.4em] text-[#444] uppercase mb-6">002 / Tech Stack</p>
-      <h1 className="skills-hero text-5xl md:text-7xl font-black text-white uppercase leading-tight mb-4">
-        What I<br /><span className="text-[#e8ff00]">Work With.</span>
-      </h1>
-      <p className="skills-hero text-[#555] text-sm mb-20 max-w-lg leading-relaxed">
-        Full-stack capabilities with a deep backend focus. Every skill listed here is something I've shipped real code with.
-      </p>
+    <div ref={ref} className="pt-32 pb-28 page-enter">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16">
+        <p className="sk-h section-label mb-5">002 / Skills</p>
+        <h1 className="sk-h text-5xl md:text-7xl font-black text-white uppercase leading-[0.9] tracking-tight mb-5">
+          Tech <span className="grad-text">Stack.</span>
+        </h1>
+        <p className="sk-h text-[#6b7280] text-sm mb-20 max-w-lg leading-relaxed">
+          29+ technologies across backend, frontend, databases, and computer science fundamentals.
+        </p>
 
-      <div className="skills-grid grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
-        {skillGroups.map((group) => (
-          <div key={group.category} className="skill-group">
-            <p className="text-[10px] tracking-[0.4em] uppercase text-[#e8ff00] mb-6">{group.category}</p>
-            <div className="flex flex-col gap-5">
-              {group.skills.map((skill) => (
-                <div key={skill.name}>
-                  <div className="flex justify-between mb-2">
-                    <span className="text-sm text-[#aaa]">{skill.name}</span>
-                    <span className="text-xs text-[#333]">{skill.level}%</span>
+        <div className="sk-grid grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+          {groups.map((group) => (
+            <div key={group.title} className="sk-group card p-6 rounded-lg">
+              <div className="flex items-center gap-2 mb-7">
+                <span className="accent-dot" />
+                <h2 className="text-xs tracking-[0.3em] uppercase text-white font-semibold">{group.title}</h2>
+              </div>
+              <div className="flex flex-col gap-5">
+                {group.items.map((item) => (
+                  <div key={item.name}>
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-sm text-[#6b7280]">{item.name}</span>
+                      <span className="text-[10px] tracking-wide text-[#374151]">{item.pct}%</span>
+                    </div>
+                    <SkillBar pct={item.pct} />
                   </div>
-                  <div className="w-full h-px bg-[#1a1a1a] relative">
-                    <div
-                      className="skill-bar-fill"
-                      style={{ '--target-scale': skill.level / 100 } as React.CSSProperties}
-                    />
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Proficiency legend */}
-      <div className="mt-20 pt-10 border-t border-[#1a1a1a] flex flex-wrap gap-8">
-        {[['90–100%', 'Expert'], ['75–89%', 'Advanced'], ['60–74%', 'Intermediate']].map(([range, label]) => (
-          <div key={label} className="flex items-center gap-3">
-            <div className="w-8 h-px bg-[#e8ff00]" />
-            <span className="text-xs text-[#444]">{range} — {label}</span>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   )

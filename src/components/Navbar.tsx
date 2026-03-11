@@ -2,13 +2,13 @@ import { NavLink } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [scrolled, setScrolled]   = useState(false)
+  const [menuOpen, setMenuOpen]   = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    const fn = () => setScrolled(window.scrollY > 40)
+    window.addEventListener('scroll', fn, { passive: true })
+    return () => window.removeEventListener('scroll', fn)
   }, [])
 
   const links = [
@@ -22,47 +22,42 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'bg-[#0a0a0a]/85 backdrop-blur-xl border-b border-[#ffffff08] shadow-[0_1px_40px_#00000080]'
+            ? 'bg-[#0d0f14]/90 backdrop-blur-2xl border-b border-[#1f2434] shadow-[0_1px_40px_#00000080]'
             : 'bg-transparent'
         }`}
         style={{ height: 'var(--nav-height)' }}
       >
-        <div className="h-full flex items-center justify-between px-8 md:px-16 lg:px-24">
+        <div className="h-full max-w-7xl mx-auto flex items-center justify-between px-6 md:px-10 lg:px-16">
 
           {/* Logo */}
-          <NavLink
-            to="/"
-            className="flex items-center gap-2 group"
-          >
-            <span className="text-white font-black text-base tracking-[0.25em] uppercase group-hover:text-[#e8ff00] transition-colors duration-300">
-              SAIF LOTFY
+          <NavLink to="/" className="flex items-center gap-2.5 group">
+            <div className="w-7 h-7 rounded bg-[#7c6aff] flex items-center justify-center">
+              <span className="text-white font-black text-xs">SL</span>
+            </div>
+            <span className="text-white font-bold text-sm tracking-wide group-hover:text-[#a78bfa] transition-colors duration-300">
+              Saif Lotfy
             </span>
-            <span className="accent-dot" />
           </NavLink>
 
-          {/* Desktop Links */}
-          <div className="hidden md:flex items-center gap-10">
+          {/* Desktop links */}
+          <div className="hidden md:flex items-center gap-9">
             {links.map((l) => (
-              <NavLink
-                key={l.to}
-                to={l.to}
-                end={l.to === '/'}
-                className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
-              >
+              <NavLink key={l.to} to={l.to} end={l.to === '/'}
+                className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>
                 {l.label}
               </NavLink>
             ))}
           </div>
 
-          {/* CV Button */}
+          {/* CV button */}
           <a
             href="/Saif-Lotfy_CV.pdf"
             download="Saif-Lotfy_CV.pdf"
-            className="cv-btn hidden md:flex items-center gap-2 text-[11px] tracking-[0.25em] uppercase border border-[#e8ff00] text-[#e8ff00] px-5 py-2.5 hover:bg-[#e8ff00] hover:text-black transition-all duration-300 font-semibold"
+            className="cv-btn hidden md:flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase bg-[#7c6aff] text-white px-5 py-2.5 font-semibold hover:bg-[#6c5ce7] transition-colors duration-300 rounded"
           >
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="shrink-0">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
               <path d="M6 1v7M3 5l3 3 3-3M1 10h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
             </svg>
             Resume
@@ -70,7 +65,7 @@ export default function Navbar() {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden flex flex-col justify-center gap-[5px] w-8 h-8 cursor-pointer"
+            className="md:hidden flex flex-col justify-center gap-[5px] w-8 h-8 cursor-pointer z-60"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
@@ -81,39 +76,30 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile menu overlay */}
-      <div
-        className={`fixed inset-0 z-40 bg-[#0a0a0a]/98 backdrop-blur-xl transition-all duration-500 flex flex-col justify-center px-10 ${
-          menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        <div className="flex flex-col gap-8 mb-12">
+      {/* Mobile overlay */}
+      <div className={`fixed inset-0 z-40 bg-[#0d0f14]/98 backdrop-blur-2xl transition-all duration-500 flex flex-col justify-center px-10 ${
+        menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+      }`}>
+        <div className="flex flex-col gap-7 mb-12">
           {links.map((l, i) => (
-            <NavLink
-              key={l.to}
-              to={l.to}
-              end={l.to === '/'}
+            <NavLink key={l.to} to={l.to} end={l.to === '/'}
               onClick={() => setMenuOpen(false)}
               className={({ isActive }) =>
                 `text-4xl font-black uppercase tracking-tight transition-colors duration-200 ${
-                  isActive ? 'text-[#e8ff00]' : 'text-[#333] hover:text-white'
+                  isActive ? 'text-[#7c6aff]' : 'text-[#1f2434] hover:text-white'
                 }`
               }
-              style={{ transitionDelay: menuOpen ? `${i * 60}ms` : '0ms' }}
-            >
-              {l.label}
-            </NavLink>
+              style={{ transitionDelay: menuOpen ? `${i * 55}ms` : '0ms' }}
+            >{l.label}</NavLink>
           ))}
         </div>
         <a
           href="/Saif-Lotfy_CV.pdf"
           download="Saif-Lotfy_CV.pdf"
           onClick={() => setMenuOpen(false)}
-          className="text-[11px] tracking-[0.3em] uppercase border border-[#e8ff00] text-[#e8ff00] px-6 py-3 text-center hover:bg-[#e8ff00] hover:text-black transition-all duration-300 w-fit"
-        >
-          ↓ Download Resume
-        </a>
-        <p className="mt-8 text-[#222] text-xs tracking-widest uppercase">saiflotfy26@gmail.com</p>
+          className="bg-[#7c6aff] text-white text-[11px] tracking-[0.2em] uppercase px-6 py-3 text-center font-semibold w-fit rounded hover:bg-[#6c5ce7] transition-colors duration-300"
+        >↓ Download Resume</a>
+        <p className="mt-8 text-[#1f2434] text-xs tracking-widest uppercase">saiflotfy26@gmail.com</p>
       </div>
     </>
   )

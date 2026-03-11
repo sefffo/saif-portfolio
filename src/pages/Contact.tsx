@@ -1,112 +1,98 @@
 import { useRef, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-gsap.registerPlugin(ScrollTrigger)
+const socials = [
+  { label: 'GitHub',    href: 'https://github.com/sefffo',                                         desc: 'github.com/sefffo'            },
+  { label: 'LinkedIn',  href: 'https://linkedin.com/in/seif-lotfy',                                desc: 'linkedin.com/in/seif-lotfy'   },
+  { label: 'Email',     href: 'mailto:saiflotfy26@gmail.com',                                      desc: 'saiflotfy26@gmail.com'        },
+  { label: 'Phone',     href: 'tel:+201277934002',                                                  desc: '+20 127 793 4002'             },
+]
 
 export default function Contact() {
   const ref = useRef<HTMLDivElement>(null)
   const [sent, setSent] = useState(false)
-  const [form, setForm] = useState({ name: '', email: '', message: '' })
 
   useGSAP(() => {
-    gsap.from('.contact-reveal', {
-      y: 50, opacity: 0, stagger: 0.1, duration: 0.8, ease: 'power3.out',
-    })
+    gsap.from('.c-reveal', { y: 40, opacity: 0, stagger: 0.08, duration: 0.75, ease: 'power3.out' })
   }, { scope: ref })
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Wire EmailJS here: emailjs.send('serviceID','templateID', form)
-    setSent(true)
-  }
-
   return (
-    <div ref={ref} id="contact" className="relative pt-28 pb-24 px-8 md:px-20 page-enter overflow-hidden">
-      {/* Big BG text */}
-      <span className="absolute bottom-8 right-0 text-[clamp(4rem,16vw,14rem)] font-black text-[#0f0f0f] leading-none select-none pointer-events-none uppercase">
-        CONTACT
-      </span>
+    <div ref={ref} className="pt-32 pb-28 page-enter">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16">
 
-      <p className="contact-reveal text-[11px] tracking-[0.4em] text-[#444] uppercase mb-6">004 / Contact</p>
-      <h1 className="contact-reveal text-5xl md:text-7xl font-black text-white uppercase leading-tight mb-16">
-        Let's Build<br /><span className="text-[#e8ff00]">Together.</span>
-      </h1>
+        <p className="c-reveal section-label mb-5">004 / Contact</p>
+        <h1 className="c-reveal text-5xl md:text-7xl font-black text-white uppercase leading-[0.9] tracking-tight mb-5">
+          Let's <span className="grad-text">Talk.</span>
+        </h1>
+        <p className="c-reveal text-[#6b7280] text-sm mb-20 max-w-lg leading-relaxed">
+          Open to full-time roles, freelance projects, internships, and collaborations.
+          Drop a message or reach out directly.
+        </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-16 relative z-10">
-        <div>
-          <p className="contact-reveal text-[#555] text-sm leading-relaxed mb-8">
-            Open to backend roles, internships, freelance projects, and collaboration.
-            Drop a message and I'll get back to you.
-          </p>
-          <div className="contact-reveal flex flex-col gap-4">
-            <a href="mailto:saiflotfy26@gmail.com" className="text-sm text-[#888] border-b border-[#222] pb-1 w-fit hover:text-white hover:border-white transition-all duration-300">
-              saiflotfy26@gmail.com
-            </a>
-            <a href="https://github.com/sefffo" target="_blank" rel="noreferrer" className="text-sm text-[#888] border-b border-[#222] pb-1 w-fit hover:text-white hover:border-white transition-all duration-300">
-              github.com/sefffo
-            </a>
-            <a href="https://linkedin.com/in/seif-lotfy" target="_blank" rel="noreferrer" className="text-sm text-[#888] border-b border-[#222] pb-1 w-fit hover:text-white hover:border-white transition-all duration-300">
-              linkedin.com/in/seif-lotfy
-            </a>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+
+          {/* Form */}
+          <div className="c-reveal">
+            {sent ? (
+              <div className="card p-8 rounded-lg text-center">
+                <span className="text-3xl mb-4 block">✓</span>
+                <p className="text-white font-semibold mb-2">Message sent!</p>
+                <p className="text-[#6b7280] text-sm">I'll get back to you shortly.</p>
+              </div>
+            ) : (
+              <form
+                onSubmit={(e) => { e.preventDefault(); setSent(true) }}
+                className="flex flex-col gap-5"
+              >
+                {[
+                  { id: 'name',    label: 'Name',    type: 'text',  placeholder: 'Your name'  },
+                  { id: 'email',   label: 'Email',   type: 'email', placeholder: 'your@email.com' },
+                ].map(f => (
+                  <div key={f.id}>
+                    <label htmlFor={f.id} className="text-[10px] tracking-[0.3em] uppercase text-[#374151] block mb-2">{f.label}</label>
+                    <input id={f.id} type={f.type} placeholder={f.placeholder} required
+                      className="w-full bg-[#13161e] border border-[#1f2434] text-[#e8eaf0] text-sm px-4 py-3 rounded focus:outline-none focus:border-[#7c6aff] transition-colors duration-200 placeholder-[#2a3045]" />
+                  </div>
+                ))}
+                <div>
+                  <label htmlFor="msg" className="text-[10px] tracking-[0.3em] uppercase text-[#374151] block mb-2">Message</label>
+                  <textarea id="msg" rows={5} placeholder="Tell me about your project..." required
+                    className="w-full bg-[#13161e] border border-[#1f2434] text-[#e8eaf0] text-sm px-4 py-3 rounded focus:outline-none focus:border-[#7c6aff] transition-colors duration-200 placeholder-[#2a3045] resize-none" />
+                </div>
+                <button type="submit"
+                  className="bg-[#7c6aff] text-white text-[11px] tracking-[0.2em] uppercase font-bold py-3.5 rounded hover:bg-[#6c5ce7] transition-colors duration-300">
+                  Send Message
+                </button>
+              </form>
+            )}
           </div>
-          <div className="contact-reveal mt-10">
+
+          {/* Socials + CV */}
+          <div className="c-reveal flex flex-col gap-5">
+            {socials.map(s => (
+              <a key={s.label} href={s.href}
+                target={s.href.startsWith('mailto') || s.href.startsWith('tel') ? undefined : '_blank'}
+                rel="noreferrer"
+                className="card p-5 rounded-lg flex items-center justify-between group hover:border-[#7c6aff]/40 transition-all duration-300">
+                <div>
+                  <p className="text-white text-sm font-semibold mb-0.5 group-hover:text-[#a78bfa] transition-colors">{s.label}</p>
+                  <p className="text-[#4b5563] text-xs">{s.desc}</p>
+                </div>
+                <span className="text-[#2a3045] group-hover:text-[#7c6aff] transition-colors duration-300 text-lg">↗</span>
+              </a>
+            ))}
+
             <a
               href="/Saif-Lotfy_CV.pdf"
-              download
-              className="inline-flex items-center gap-3 text-[11px] tracking-[0.3em] uppercase border border-[#e8ff00] text-[#e8ff00] px-6 py-3 hover:bg-[#e8ff00] hover:text-black transition-all duration-300"
+              download="Saif-Lotfy_CV.pdf"
+              className="cv-btn mt-2 bg-[#7c6aff] text-white text-[11px] tracking-[0.2em] uppercase font-bold py-4 rounded text-center hover:bg-[#6c5ce7] transition-colors duration-300 flex items-center justify-center gap-2"
             >
-              <span>↓</span> Download CV
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3M1 10h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+              Download Resume
             </a>
           </div>
         </div>
-
-        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-          {sent ? (
-            <div className="text-[#e8ff00] text-sm tracking-widest uppercase pt-10">
-              ✓ Message sent. I'll reply soon.
-            </div>
-          ) : (
-            <>
-              <div className="contact-reveal">
-                <input
-                  type="text" placeholder="Your Name" required
-                  value={form.name}
-                  onChange={e => setForm({ ...form, name: e.target.value })}
-                  className="w-full bg-transparent border-b border-[#1f1f1f] py-3 text-sm text-[#ccc] placeholder-[#2a2a2a] focus:outline-none focus:border-[#e8ff00] transition-colors duration-300"
-                />
-              </div>
-              <div className="contact-reveal">
-                <input
-                  type="email" placeholder="Your Email" required
-                  value={form.email}
-                  onChange={e => setForm({ ...form, email: e.target.value })}
-                  className="w-full bg-transparent border-b border-[#1f1f1f] py-3 text-sm text-[#ccc] placeholder-[#2a2a2a] focus:outline-none focus:border-[#e8ff00] transition-colors duration-300"
-                />
-              </div>
-              <div className="contact-reveal">
-                <textarea
-                  placeholder="Message" rows={5} required
-                  value={form.message}
-                  onChange={e => setForm({ ...form, message: e.target.value })}
-                  className="w-full bg-transparent border-b border-[#1f1f1f] py-3 text-sm text-[#ccc] placeholder-[#2a2a2a] focus:outline-none focus:border-[#e8ff00] transition-colors duration-300 resize-none"
-                />
-              </div>
-              <button
-                type="submit"
-                className="contact-reveal self-start px-8 py-3 text-xs tracking-[0.3em] uppercase border border-[#e8ff00] text-[#e8ff00] hover:bg-[#e8ff00] hover:text-black transition-all duration-300"
-              >
-                Send Message
-              </button>
-            </>
-          )}
-        </form>
-      </div>
-
-      <div className="relative z-10 mt-24 pt-8 border-t border-[#1a1a1a] flex justify-between items-center">
-        <span className="text-xs text-[#333] uppercase tracking-widest">Saif Lotfy © 2026</span>
-        <span className="text-xs text-[#333] uppercase tracking-widest">Cairo, Egypt</span>
       </div>
     </div>
   )
