@@ -10,7 +10,7 @@ const experience = [
     role: 'Team Lead & Backend Developer — National University Portal',
     company: 'Production Project',
     location: 'Egypt',
-    period: '2026 – Present',
+    period: '2026 – 2027',
     current: true,
     points: [
       'Leading a dev team AND building the backend simultaneously — architecting a production student portal system to modernize university portals across Egypt',
@@ -23,7 +23,7 @@ const experience = [
     role: '.NET Backend Developer Intern',
     company: 'Code Way (LMS Platform)',
     location: 'Cairo, Egypt',
-    period: 'Nov 2025 – Present',
+    period: 'Nov 2025 – 2027',
     current: true,
     points: [
       'Designing and building backend microservices for a production LMS using ASP.NET Core and Clean Architecture',
@@ -36,7 +36,7 @@ const experience = [
     role: 'Front-End Instructor',
     company: 'Savvy Programming School',
     location: 'Cairo, Egypt',
-    period: 'Sep 2025 – Present',
+    period: 'Sep 2025 – 2027',
     current: true,
     points: [
       'Teaching HTML, CSS, JavaScript, and Angular to students aged 10–18 through structured labs and interactive coding lessons',
@@ -85,7 +85,7 @@ const education = [
     department: 'Software Engineering Department',
     school: 'Benha National University — Obour Campus',
     schoolUrl: 'https://www.linkedin.com/school/benhanationaluniversity/posts/?feedView=all',
-    period: '2023 – Present',
+    period: '2023 – 2027',
     badge: 'GPA: 3.72 / 4.00',
     highlights: [
       '3rd place in class ranking',
@@ -137,7 +137,7 @@ export default function About() {
   }, { scope: ref })
 
   return (
-    <section ref={ref} className="page-wrapper pb-28 page-enter">
+    <section ref={ref} className="page-wrapper pb-40 page-enter">
       <div className="max-w-7xl mx-auto pt-16">
 
         <p className="a-reveal section-label mb-4">001 / About</p>
@@ -265,7 +265,7 @@ export default function About() {
         </div>
 
         {/* Education */}
-        <div className="edu-section">
+        <div className="edu-section pb-4">
           <p className="section-label mb-12">Education</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {education.map((edu, i) => (
