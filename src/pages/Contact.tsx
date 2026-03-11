@@ -32,136 +32,134 @@ const SOCIALS = [
 
 type Status = 'idle' | 'sending' | 'sent' | 'error'
 
+// ── Floating label input ──────────────────────────────────────────────────────
 function FloatingInput({
-  label, type = 'text', value, onChange, placeholder, required
+  label, type = 'text', value, onChange, placeholder, required,
 }: {
   label: string; type?: string; value: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   placeholder: string; required?: boolean
 }) {
   const [focused, setFocused] = useState(false)
-  const active = focused || value.length > 0
+  const lifted = focused || value.length > 0
   return (
-    <div className="relative">
+    <div className="relative pt-5">
+      {/* floating label */}
       <label
-        className="absolute left-0 transition-all duration-200 pointer-events-none select-none"
+        className="absolute left-0 pointer-events-none select-none transition-all duration-200"
         style={{
-          top: active ? '-2px' : '16px',
-          fontSize: active ? '9px' : '13px',
-          letterSpacing: active ? '0.45em' : '0.01em',
-          textTransform: active ? 'uppercase' : 'none',
-          color: focused ? '#7c6aff' : active ? '#374151' : '#374151',
+          top:           lifted ? '0px'   : '20px',
+          fontSize:      lifted ? '9px'   : '14px',
+          letterSpacing: lifted ? '0.4em' : '0.01em',
+          textTransform: lifted ? 'uppercase' : 'none',
+          color:         focused ? '#7c6aff' : '#4b5563',
         }}
       >
         {label}
       </label>
+
       <input
-        type={type} required={required} value={value}
+        type={type}
+        required={required}
+        value={value}
         onChange={onChange}
+        /* placeholder only visible when focused so it never overlaps the label */
         placeholder={focused ? placeholder : ''}
         onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
-        className="w-full bg-transparent pt-6 pb-3 text-[#e8eaf0] text-base focus:outline-none transition-colors"
+        onBlur={()  => setFocused(false)}
+        className="w-full bg-transparent pb-2.5 text-[#e8eaf0] text-sm focus:outline-none transition-colors"
         style={{ borderBottom: `1.5px solid ${focused ? '#7c6aff' : '#1e2235'}` }}
       />
-      {/* Focus glow line */}
+
+      {/* animated underline glow */}
       <div
         className="absolute bottom-0 left-0 h-[1.5px] transition-all duration-300"
         style={{
-          width: focused ? '100%' : '0%',
+          width:      focused ? '100%' : '0%',
           background: 'linear-gradient(90deg, #7c6aff, #a78bfa)',
-          boxShadow: '0 0 8px #7c6aff88',
+          boxShadow:  '0 0 8px #7c6aff88',
         }}
       />
     </div>
   )
 }
 
+// ── Floating label textarea ───────────────────────────────────────────────────
 function FloatingTextarea({
-  label, value, onChange, placeholder, rows = 5, required
+  label, value, onChange, placeholder, rows = 5, required,
 }: {
   label: string; value: string
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
   placeholder: string; rows?: number; required?: boolean
 }) {
   const [focused, setFocused] = useState(false)
-  const active = focused || value.length > 0
+  const lifted = focused || value.length > 0
   return (
-    <div className="relative">
+    <div className="relative pt-5">
       <label
-        className="absolute left-0 transition-all duration-200 pointer-events-none select-none"
+        className="absolute left-0 pointer-events-none select-none transition-all duration-200"
         style={{
-          top: active ? '-2px' : '16px',
-          fontSize: active ? '9px' : '13px',
-          letterSpacing: active ? '0.45em' : '0.01em',
-          textTransform: active ? 'uppercase' : 'none',
-          color: focused ? '#7c6aff' : active ? '#374151' : '#374151',
+          top:           lifted ? '0px'   : '20px',
+          fontSize:      lifted ? '9px'   : '14px',
+          letterSpacing: lifted ? '0.4em' : '0.01em',
+          textTransform: lifted ? 'uppercase' : 'none',
+          color:         focused ? '#7c6aff' : '#4b5563',
         }}
       >
         {label}
       </label>
+
       <textarea
-        rows={rows} required={required} value={value}
+        rows={rows}
+        required={required}
+        value={value}
         onChange={onChange}
         placeholder={focused ? placeholder : ''}
         onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
-        className="w-full bg-transparent pt-6 pb-3 text-[#e8eaf0] text-base focus:outline-none resize-none transition-colors"
+        onBlur={()  => setFocused(false)}
+        className="w-full bg-transparent pb-2.5 text-[#e8eaf0] text-sm focus:outline-none resize-none transition-colors"
         style={{ borderBottom: `1.5px solid ${focused ? '#7c6aff' : '#1e2235'}` }}
       />
+
       <div
         className="absolute bottom-0 left-0 h-[1.5px] transition-all duration-300"
         style={{
-          width: focused ? '100%' : '0%',
+          width:      focused ? '100%' : '0%',
           background: 'linear-gradient(90deg, #7c6aff, #a78bfa)',
-          boxShadow: '0 0 8px #7c6aff88',
+          boxShadow:  '0 0 8px #7c6aff88',
         }}
       />
     </div>
   )
 }
 
+// ── Page ─────────────────────────────────────────────────────────────────────
 export default function Contact() {
-  const ref       = useRef<HTMLDivElement>(null)
-  const formRef   = useRef<HTMLFormElement>(null)
-  const planeRef  = useRef<SVGSVGElement>(null)
-  const btnRef    = useRef<HTMLButtonElement>(null)
-  const [status, setStatus]   = useState<Status>('idle')
-  const [errMsg, setErrMsg]   = useState('')
-  const [form, setForm]       = useState({ name: '', email: '', message: '' })
+  const ref      = useRef<HTMLDivElement>(null)
+  const formRef  = useRef<HTMLFormElement>(null)
+  const planeRef = useRef<SVGSVGElement>(null)
+  const btnRef   = useRef<HTMLButtonElement>(null)
+
+  const [status, setStatus] = useState<Status>('idle')
+  const [errMsg,  setErrMsg]  = useState('')
+  const [form,    setForm]    = useState({ name: '', email: '', message: '' })
 
   useGSAP(() => {
     gsap.from('.cl-tag',    { y: 20, opacity: 0, duration: 0.6, ease: 'power3.out' })
-    gsap.from('.cl-title',  { y: 40, opacity: 0, duration: 0.8, delay: 0.1, ease: 'power3.out' })
+    gsap.from('.cl-title',  { y: 40, opacity: 0, duration: 0.8, delay: 0.1,  ease: 'power3.out' })
     gsap.from('.cl-sub',    { y: 20, opacity: 0, duration: 0.6, delay: 0.25, ease: 'power3.out' })
     gsap.from('.cl-social', { y: 16, opacity: 0, stagger: 0.08, duration: 0.5, delay: 0.35, ease: 'power3.out' })
-    gsap.from('.cr-inner',  { x: 40, opacity: 0, duration: 0.8, delay: 0.2, ease: 'power3.out' })
+    gsap.from('.cr-inner',  { x: 40, opacity: 0, duration: 0.8, delay: 0.2,  ease: 'power3.out' })
   }, { scope: ref })
-
-  const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-    setForm(p => ({ ...p, [k]: e.target.value }))
 
   const animatePlane = () => {
     if (!planeRef.current || !btnRef.current) return
     const tl = gsap.timeline()
-    // plane flies up-right and fades out
-    tl.to(planeRef.current, {
-      x: 80, y: -80,
-      rotation: 45,
-      opacity: 0,
-      duration: 0.55,
-      ease: 'power2.in',
-    })
-    // btn shrinks slightly
-    tl.to(btnRef.current, { scale: 0.97, duration: 0.15 }, 0)
-    // reset plane position (invisible) and fly back in from bottom-left
-    tl.set(planeRef.current, { x: -60, y: 60, rotation: -45 })
-    tl.to(planeRef.current, {
-      x: 0, y: 0, rotation: 0, opacity: 1,
-      duration: 0.45,
-      ease: 'power3.out',
-    })
-    tl.to(btnRef.current, { scale: 1, duration: 0.2, ease: 'back.out(1.5)' }, '-=0.3')
+    tl.to(planeRef.current, { x: 60, y: -60, rotation: 45, opacity: 0, duration: 0.5, ease: 'power2.in' })
+    tl.to(btnRef.current,   { scale: 0.97, duration: 0.15 }, 0)
+    tl.set(planeRef.current, { x: -50, y: 50, rotation: -45 })
+    tl.to(planeRef.current, { x: 0, y: 0, rotation: 0, opacity: 1, duration: 0.4, ease: 'power3.out' })
+    tl.to(btnRef.current,   { scale: 1, duration: 0.2, ease: 'back.out(1.5)' }, '-=0.3')
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -178,7 +176,7 @@ export default function Contact() {
       setForm({ name: '', email: '', message: '' })
     } catch (err) {
       console.error(err)
-      setErrMsg('Failed to send. Email me directly at saiflotfy26@gmail.com')
+      setErrMsg('Failed to send. Email me at saiflotfy26@gmail.com')
       setStatus('error')
     }
   }
@@ -189,7 +187,7 @@ export default function Contact() {
       className="page-enter flex flex-col lg:flex-row"
       style={{ minHeight: '100vh', paddingTop: 'var(--nav-height)' }}
     >
-      {/* ═══ LEFT PANEL ═══ */}
+      {/* ══ LEFT PANEL ══ */}
       <div
         className="relative lg:w-[45%] flex flex-col justify-between px-10 py-16 lg:px-16 overflow-hidden"
         style={{
@@ -256,7 +254,7 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* ═══ RIGHT PANEL ═══ */}
+      {/* ══ RIGHT PANEL ══ */}
       <div className="flex-1 flex items-center justify-center px-10 py-16 lg:px-16"
         style={{ background: '#0d0f14' }}>
         <div className="cr-inner w-full max-w-xl">
@@ -271,7 +269,7 @@ export default function Contact() {
               </div>
               <div>
                 <p className="text-white font-black text-3xl uppercase tracking-tight mb-3">Message Sent! ✉️</p>
-                <p className="text-[#4b5563] text-sm">I’ll get back to you as soon as possible.</p>
+                <p className="text-[#4b5563] text-sm">I'll get back to you as soon as possible.</p>
               </div>
               <button onClick={() => setStatus('idle')}
                 className="mt-4 text-[10px] tracking-[0.35em] uppercase text-[#374151] hover:text-[#7c6aff] transition-colors">
@@ -288,18 +286,24 @@ export default function Contact() {
               </div>
 
               <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-10" noValidate>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
-                  <FloatingInput label="Name" value={form.name}
+                  <FloatingInput
+                    label="Name" value={form.name} placeholder="Your full name" required
                     onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
-                    placeholder="Your full name" required />
-                  <FloatingInput label="Email" type="email" value={form.email}
+                  />
+                  <FloatingInput
+                    label="Email" type="email" value={form.email} placeholder="you@example.com" required
                     onChange={e => setForm(p => ({ ...p, email: e.target.value }))}
-                    placeholder="you@example.com" required />
+                  />
                 </div>
 
-                <FloatingTextarea label="Message" value={form.message} rows={6}
+                <FloatingTextarea
+                  label="Message" value={form.message} rows={6}
+                  placeholder="Tell me about your project or opportunity..."
                   onChange={e => setForm(p => ({ ...p, message: e.target.value }))}
-                  placeholder="Tell me about your project or opportunity..." required />
+                  required
+                />
 
                 {status === 'error' && (
                   <p className="text-[#ef4444] text-xs flex items-center gap-2 -mt-4">
@@ -307,33 +311,33 @@ export default function Contact() {
                   </p>
                 )}
 
-                {/* ── PAPER PLANE BUTTON ── */}
+                {/* ── SEND BUTTON ── */}
                 <button
                   ref={btnRef}
                   type="submit"
                   disabled={status === 'sending'}
-                  className="group relative w-full overflow-hidden rounded-2xl flex items-center justify-between gap-4 disabled:opacity-60 transition-all duration-300"
+                  className="group relative w-full overflow-hidden rounded-xl flex items-center justify-between disabled:opacity-60 transition-all duration-300"
                   style={{
                     background: 'linear-gradient(135deg, #7c6aff, #6c5ce7)',
-                    padding: '22px 32px',
-                    boxShadow: '0 8px 32px #7c6aff44, 0 2px 0 #4a3fbf',
+                    padding: '14px 20px',
+                    boxShadow: '0 4px 20px #7c6aff33',
                   }}
                 >
-                  {/* shimmer */}
+                  {/* shimmer sweep */}
                   <span className="pointer-events-none absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-                  <span className="text-white font-black text-lg uppercase tracking-[0.2em]">
+                  <span className="text-white font-bold text-sm uppercase tracking-[0.25em]">
                     {status === 'sending' ? 'Sending...' : 'Send Message'}
                   </span>
 
-                  <span className="relative w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-white/20 transition-colors duration-300">
+                  {/* plane icon box */}
+                  <span className="relative w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-white/20 transition-colors duration-300">
                     {status === 'sending' ? (
-                      <span className="w-5 h-5 rounded-full border-2 border-white/30 border-t-white animate-spin" />
+                      <span className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
                     ) : (
-                      /* Paper plane SVG */
                       <svg
                         ref={planeRef}
-                        width="22" height="22" viewBox="0 0 24 24"
+                        width="17" height="17" viewBox="0 0 24 24"
                         fill="none" stroke="white" strokeWidth="2"
                         strokeLinecap="round" strokeLinejoin="round"
                         style={{ transformOrigin: 'center' }}
