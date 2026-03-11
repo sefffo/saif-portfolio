@@ -51,7 +51,7 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Desktop CV button — FIXED href */}
+          {/* Desktop CV button */}
           <a
             href="/Saif%20Lotfy_CV.pdf"
             download="Saif-Lotfy_CV.pdf"
@@ -89,7 +89,7 @@ export default function Navbar() {
           <span className="text-white font-bold text-sm tracking-wide">Saif Lotfy</span>
         </div>
 
-        {/* Middle: nav links */}
+        {/* Middle: nav links + download button */}
         <div className="flex flex-col gap-6">
           {links.map((l, i) => (
             <NavLink key={l.to} to={l.to} end={l.to === '/'}
@@ -102,29 +102,27 @@ export default function Navbar() {
               style={{ transitionDelay: menuOpen ? `${i * 55}ms` : '0ms' }}
             >{l.label}</NavLink>
           ))}
-        </div>
 
-        {/* Bottom: CTA + email */}
-        <div className="flex flex-col gap-5">
-          {/* FIXED href */}
+          {/* Download button — right below nav links */}
           <a
             href="/Saif%20Lotfy_CV.pdf"
             download="Saif-Lotfy_CV.pdf"
             onClick={() => setMenuOpen(false)}
-            className="bg-[#7c6aff] text-white text-[11px] tracking-[0.2em] uppercase px-6 py-3.5 text-center font-semibold w-full rounded hover:bg-[#6c5ce7] transition-colors duration-300 flex items-center justify-center gap-2"
+            className="mt-2 bg-[#7c6aff] text-white text-sm tracking-[0.2em] uppercase px-6 py-5 text-center font-semibold w-full rounded-xl hover:bg-[#6c5ce7] transition-colors duration-300 flex items-center justify-center gap-3"
           >
-            <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+            <svg width="14" height="14" viewBox="0 0 12 12" fill="none">
               <path d="M6 1v7M3 5l3 3 3-3M1 10h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
             </svg>
             Download Resume
           </a>
+        </div>
 
-          <div className="border-t border-[#1e2235] pt-5 flex items-center justify-between">
-            <p className="text-[#2a3045] text-xs tracking-widest uppercase">saiflotfy26@gmail.com</p>
-            <div className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e] animate-pulse" />
-              <span className="text-[10px] tracking-widest text-[#2a3045] uppercase">Available</span>
-            </div>
+        {/* Bottom: email + available */}
+        <div className="border-t border-[#1e2235] pt-5 flex items-center justify-between">
+          <p className="text-[#2a3045] text-xs tracking-widest uppercase">saiflotfy26@gmail.com</p>
+          <div className="flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e] animate-pulse" />
+            <span className="text-[10px] tracking-widest text-[#2a3045] uppercase">Available</span>
           </div>
         </div>
       </div>
