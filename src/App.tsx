@@ -12,14 +12,14 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div className="bg-[#0a0a0a] min-h-screen overflow-x-hidden">
+      <div className="min-h-screen overflow-x-hidden" style={{ background: 'var(--bg)' }}>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/skills" element={<Skills />} />
+          <Route path="/"         element={<Home />} />
+          <Route path="/about"    element={<About />} />
+          <Route path="/skills"   element={<Skills />} />
           <Route path="/projects" element={<Projects />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/contact"  element={<Contact />} />
         </Routes>
       </div>
     </BrowserRouter>
