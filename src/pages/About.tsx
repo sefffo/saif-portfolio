@@ -26,7 +26,7 @@ const experience = [
     period: 'Nov 2025 – Present',
     current: true,
     points: [
-      'Designing and building backend microservices for a production LMS using .NET 9, ASP.NET Core, and Clean Architecture',
+      'Designing and building backend microservices for a production LMS using ASP.NET Core and Clean Architecture',
       'Contributed ~50% of all services: Identity (JWT/OAuth2), Course, Certificate, Content, and active Payment Service (Paymob)',
       'Real-time features via SignalR + WebSockets; Redis caching for high-performance reads',
       'SQL Server + MongoDB with EF Core + LINQ — all running in production serving real users',
@@ -82,15 +82,29 @@ const experience = [
 const education = [
   {
     degree: 'B.Sc. in Computer Science',
+    department: 'Software Engineering Department',
     school: 'Benha National University — Obour Campus',
+    schoolUrl: 'https://www.linkedin.com/school/benhanationaluniversity/posts/?feedView=all',
     period: '2023 – Present',
     badge: 'GPA: 3.72 / 4.00',
+    highlights: [
+      '3rd place in class ranking',
+      'Software Engineering specialisation track',
+      'Relevant: Data Structures, Algorithms, OS, Databases, OOP, Networks',
+    ],
   },
   {
-    degree: 'Full-Stack Web Development Track',
+    degree: 'Full-Stack Web Development Diploma',
+    department: 'Frontend: Angular · Backend: ASP.NET Core',
     school: 'Route Academy IT Training Center',
+    schoolUrl: 'https://www.linkedin.com/company/routeacademy/posts/?feedView=all',
     period: '2024 – 2025',
-    badge: 'Angular · ASP.NET Core',
+    badge: 'Graduated',
+    highlights: [
+      'Completed full professional diploma covering both frontend and backend tracks',
+      'Frontend: HTML, CSS, JavaScript, TypeScript, Angular',
+      'Backend: C#, ASP.NET Core, EF Core, SQL Server, Clean Architecture',
+    ],
   },
 ]
 
@@ -150,18 +164,18 @@ export default function About() {
             </div>
 
             <p className="a-reveal text-[#6b7280] text-sm leading-[1.9] mb-4">
-              Backend engineer focused on .NET 9, ASP.NET Core, microservices, and maintainable systems.
+              Backend engineer focused on ASP.NET Core, microservices, and maintainable systems.
               Built production systems at Code Way (contributed 50% of a live LMS), Computer Vision intern at NAID,
               and currently leading + building the backend for a portal launching across Egyptian universities.
             </p>
             <p className="a-reveal text-[#4b5563] text-sm leading-[1.9] mb-8">
               Also a Front-End Instructor at Savvy Programming School teaching Angular and JavaScript to students aged 10–18.
-              ICPC competitor. GPA 3.72. Strong communicator, Agile practitioner, and hands-on team lead.
+              ICPC competitor. GPA 3.72 — 3rd in class. Strong communicator, Agile practitioner, and hands-on team lead.
             </p>
 
             <div className="a-reveal flex flex-wrap gap-2">
               {[
-                'Cairo 🇪🇬', 'GPA 3.72', 'Open to Work',
+                'Cairo 🇪🇬', 'GPA 3.72', '3rd in Class', 'Open to Work',
                 'C1 English', 'Team Lead', 'ICPC 2024',
                 'CV @NAID', 'Instructor @Savvy', 'Backend @Code Way',
               ].map(tag => (
@@ -174,14 +188,15 @@ export default function About() {
             {[
               { label: 'Location',      value: 'Cairo, Egypt'                                     },
               { label: 'Primary Role',  value: '.NET Backend Developer'                           },
-              { label: 'Core Stack',    value: 'ASP.NET Core · C# 13 · SQL Server · Redis'       },
+              { label: 'Core Stack',    value: 'ASP.NET Core · C# · SQL Server · Redis'           },
               { label: 'Architecture',  value: 'Clean Arch · Microservices · SOLID · DDD'         },
-              { label: 'Frontend',      value: 'Angular 17 · TypeScript · RxJS · NgRx'            },
+              { label: 'Frontend',      value: 'Angular · TypeScript · RxJS · NgRx'               },
               { label: 'Also',          value: 'Node.js · Python · Computer Vision'               },
               { label: 'CI/CD & Tools', value: 'GitHub Actions · Jenkins · Docker · Jira · Slack' },
               { label: 'Roles',         value: 'Team Lead · Backend Dev · Instructor · ICPC'      },
               { label: 'Education',     value: 'B.Sc. CS — Benha National University'             },
-              { label: 'GPA',           value: '3.72 / 4.00'                                      },
+              { label: 'Department',    value: 'Software Engineering'                             },
+              { label: 'GPA',           value: '3.72 / 4.00 — 3rd in Class'                      },
               { label: 'Languages',     value: 'Arabic (Native) · English (C1)'                  },
             ].map(item => (
               <div key={item.label} className="flex justify-between items-start border-b border-[#1e2235] pb-3.5 group">
@@ -254,11 +269,43 @@ export default function About() {
           <p className="section-label mb-12">Education</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {education.map((edu, i) => (
-              <div key={i} className="edu-card card p-7 rounded-lg hover:border-[#7c6aff]/40 transition-all duration-300">
-                <p className="text-[10px] tracking-[0.35em] uppercase text-[#272d42] mb-4">{edu.period}</p>
-                <h3 className="text-white font-bold text-base mb-1.5">{edu.degree}</h3>
-                <p className="text-[#4b5563] text-sm mb-4">{edu.school}</p>
-                <span className="text-[10px] tracking-widest text-[#7c6aff] border border-[#7c6aff]/20 px-2.5 py-1 rounded">{edu.badge}</span>
+              <div key={i} className="edu-card card p-7 rounded-lg hover:border-[#7c6aff]/40 transition-all duration-300 flex flex-col gap-5">
+
+                {/* period + badge */}
+                <div className="flex items-center justify-between flex-wrap gap-2">
+                  <p className="text-[10px] tracking-[0.35em] uppercase text-[#272d42]">{edu.period}</p>
+                  <span className="text-[10px] tracking-widest text-[#7c6aff] border border-[#7c6aff]/20 px-2.5 py-1 rounded">{edu.badge}</span>
+                </div>
+
+                {/* degree + department */}
+                <div>
+                  <h3 className="text-white font-bold text-base mb-1">{edu.degree}</h3>
+                  <p className="text-[#6b7280] text-xs tracking-wide">{edu.department}</p>
+                </div>
+
+                {/* school link */}
+                <a
+                  href={edu.schoolUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 text-[#4b5563] text-sm hover:text-[#a78bfa] transition-colors duration-200 group w-fit"
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" className="opacity-60 group-hover:opacity-100 flex-shrink-0">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                  </svg>
+                  <span className="text-xs">{edu.school}</span>
+                  <span className="text-[#272d42] group-hover:text-[#7c6aff] transition-colors">↗</span>
+                </a>
+
+                {/* highlights */}
+                <ul className="flex flex-col gap-2">
+                  {edu.highlights.map((h, j) => (
+                    <li key={j} className="flex gap-3 text-[#4b5563] text-xs leading-[1.7]">
+                      <span className="text-[#7c6aff] shrink-0">→</span>{h}
+                    </li>
+                  ))}
+                </ul>
+
               </div>
             ))}
           </div>
