@@ -47,6 +47,9 @@ const projects = [
       'Identity Service: JWT + OAuth2 + full role-based auth (Admin, Instructor, Student)',
       'Redis caching on hot paths; SignalR for real-time course notifications',
       'Payment Service: actively integrating third-party payment gateways (Paymob)',
+      'Full SDLC managed via Azure Devops (sprints, backlog), Slack (team comms), GitHub Actions + Jenkins (CI/CD)',
+      'Microservices backend with ASP.NET Core + Clean Architecture designed to scale across Egyptian universities',
+      'Sprint-based Agile delivery: backlog grooming → sprint planning → dev → review → retrospective',
     ],
   },
   {
