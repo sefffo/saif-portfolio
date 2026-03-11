@@ -2,24 +2,26 @@ import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import SkillKeyboard from '../components/SkillKeyboard'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const categories = [
   {
     label: 'Languages',
-    color: '#7c6aff',
+    color: '#a78bfa',
     skills: ['C', 'C++', 'C# 13', 'JavaScript', 'TypeScript', 'Python', 'SQL / T-SQL', 'HTML', 'CSS', 'SCSS'],
   },
   {
     label: 'Backend & .NET',
-    color: '#a78bfa',
+    color: '#7c6aff',
     skills: [
       '.NET 9', 'ASP.NET Core', 'ASP.NET MVC', 'ASP.NET Web API',
       'Entity Framework Core', 'ADO.NET', 'LINQ',
       'AutoMapper', 'FluentValidation', 'Serilog',
       'RESTful APIs', 'SignalR', 'WebSockets',
       'JWT', 'OAuth2', 'Google OAuth2',
+      'Node.js', 'Express.js', 'NestJS',
       'Clean Architecture', 'Microservices Architecture',
       'Repository Pattern', 'Unit of Work', 'Specification Pattern',
     ],
@@ -45,7 +47,7 @@ const categories = [
       'OOP', 'Functional Programming',
       'Data Structures', 'Algorithms', 'Complexity Analysis',
       'SOLID Principles', 'Design Patterns', 'DDD', 'System Design',
-      'Competitive Programming',
+      'Competitive Programming (ICPC)',
     ],
   },
   {
@@ -69,8 +71,8 @@ export default function Skills() {
   const ref = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
-    // Only animate the header — not the pills (they are visible by default)
-    gsap.from('.sk-h', { y: 40, opacity: 0, stagger: 0.07, duration: 0.75, ease: 'power3.out' })
+    gsap.from('.sk-h',     { y: 40, opacity: 0, stagger: 0.07, duration: 0.75, ease: 'power3.out' })
+    gsap.from('.kbd-wrap', { y: 50, opacity: 0, duration: 0.9, delay: 0.4, ease: 'power3.out' })
     gsap.from('.cat-block', {
       y: 30, opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power3.out',
       scrollTrigger: { trigger: '.cats-section', start: 'top 85%' },
@@ -85,15 +87,21 @@ export default function Skills() {
         <h1 className="sk-h text-5xl md:text-7xl font-black text-white uppercase leading-[0.9] tracking-tight mb-4">
           Tech <span className="grad-text">Stack.</span>
         </h1>
-        <p className="sk-h text-[#6b7280] text-sm mb-16 max-w-xl leading-relaxed">
-          Every technology I've actively used — across backend, frontend, databases, systems, and tooling.
-          Hover any pill to highlight it.
+        <p className="sk-h text-[#6b7280] text-sm mb-12 max-w-xl leading-relaxed">
+          Every technology I actively use — hover any key on the keyboard below to see what I know about it,
+          then scroll down for the full categorized breakdown.
         </p>
 
+        {/* ── INTERACTIVE KEYBOARD ── */}
+        <div className="kbd-wrap mb-20">
+          <SkillKeyboard />
+        </div>
+
+        {/* ── CATEGORY PILLS ── */}
+        <p className="section-label mb-10">Full Breakdown</p>
         <div className="cats-section flex flex-col gap-12">
           {categories.map((cat) => (
             <div key={cat.label} className="cat-block">
-              {/* Category header */}
               <div className="flex items-center gap-3 mb-5">
                 <span
                   className="w-2 h-2 rounded-full flex-shrink-0"
@@ -106,8 +114,6 @@ export default function Skills() {
                   {cat.label}
                 </span>
               </div>
-
-              {/* Pills — flex-wrap, always visible */}
               <div className="flex flex-wrap gap-2">
                 {cat.skills.map((skill) => (
                   <span key={skill} className="skill-pill">
