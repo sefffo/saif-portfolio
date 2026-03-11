@@ -30,9 +30,13 @@ const categories = [
       { name: '.NET 9 / ASP.NET Core',     note: 'Minimal APIs, Web API controllers, middleware, DI container, filters, background services.' },
       { name: 'Clean Architecture',         note: 'Domain → Application → Infrastructure → API layers. Every project I build follows this structure.' },
       { name: 'Microservices Architecture', note: 'Contributed 50%+ of Code Way LMS services. API Gateway, service discovery, inter-service HTTP/messaging.' },
+      { name: 'CQRS',                       note: 'Command Query Responsibility Segregation — separating reads from writes for scalable, maintainable service layers.' },
+      { name: 'MediatR (Mediator Pattern)', note: 'In-process messaging via MediatR — decoupled command/query handlers and notification pipelines in .NET.' },
+      { name: 'RabbitMQ',                   note: 'Message broker for async inter-service communication — queues, exchanges, and dead-letter handling in microservices.' },
+      { name: 'n8n',                        note: 'Workflow automation platform — building low-code integration pipelines connecting services, webhooks, and APIs.' },
       { name: 'Entity Framework Core',      note: 'Code-First, complex migrations, LINQ queries, interceptors, seeding — used daily in production.' },
       { name: 'Repository + Unit of Work',  note: 'Abstraction layers for data access, enabling testability and clean separation of concerns.' },
-      { name: 'SignalR / WebSockets',        note: 'Real-time hubs for live notifications, dashboards, and chat features in production apps.' },
+      { name: 'SignalR / WebSockets',       note: 'Real-time hubs for live notifications, dashboards, and chat features in production apps.' },
       { name: 'JWT / OAuth2 / Google',      note: 'Full auth flows — access/refresh tokens, role claims, PKCE, identity federation via Google OAuth2.' },
       { name: 'Node.js / NestJS',           note: 'REST APIs, async I/O, dependency injection in NestJS — used as a secondary backend runtime.' },
       { name: 'AutoMapper / FluentVal',     note: 'DTO mapping and input validation — clean, declarative, decoupled from business logic.' },
@@ -77,6 +81,8 @@ const categories = [
       { name: 'OOP',                    note: 'Encapsulation, inheritance, polymorphism, abstraction — applied in every C# and TypeScript project.' },
       { name: 'SOLID Principles',        note: 'SRP, OCP, LSP, ISP, DIP — the lens through which I evaluate and review all architecture decisions.' },
       { name: 'Design Patterns',         note: 'Repository, Unit of Work, Specification, Factory, Strategy, Observer — applied contextually, not dogmatically.' },
+      { name: 'CQRS',                    note: 'Separating read (queries) from write (commands) — enables independent scaling and cleaner service boundaries.' },
+      { name: 'Mediator Pattern',        note: 'Objects communicate via a central mediator — reduces coupling, improves testability across handler chains.' },
       { name: 'Data Structures',         note: 'Arrays, trees, graphs, heaps, tries — deeply practiced through ICPC and LeetCode.' },
       { name: 'Algorithms & Complexity', note: 'Sorting, searching, dynamic programming, greedy, graph traversal — O(n) analysis fluency.' },
       { name: 'DDD',                     note: 'Domain-Driven Design concepts — aggregates, value objects, bounded contexts in microservice design.' },
@@ -93,6 +99,7 @@ const categories = [
       { name: 'GitHub Actions',     note: 'CI/CD pipelines for automated build, test, and deploy workflows on push/PR.' },
       { name: 'Jenkins',            note: 'Jenkins pipelines for the Uni Portal project — staging and production automation.' },
       { name: 'Docker',             note: 'Containerized all microservices — Docker Compose for local full-stack orchestration.' },
+      { name: 'n8n',                note: 'Workflow automation — no-code/low-code pipelines for integrations, scheduled tasks, and webhook chains.' },
       { name: 'Jira',               note: 'Sprint planning, backlog grooming, task delegation as Team Lead on the National Uni Portal.' },
       { name: 'Postman',            note: 'API testing, collection management, environment variables, pre-request scripting.' },
       { name: 'Swagger / OpenAPI',  note: 'Auto-generated interactive API docs — versioned, annotated, and shared with frontend teams.' },
@@ -105,11 +112,11 @@ const categories = [
     color: '#f97316',
     desc: 'Applied ML and CV work from my internship at NAID and personal research.',
     skills: [
-      { name: 'Computer Vision', note: 'Worked on CV pipelines at NAID (National Academy for IT) — a government accessibility-focused institution.' },
-      { name: 'OpenCV',          note: 'Image preprocessing, edge detection, contour analysis, real-time video frame processing.' },
+      { name: 'Computer Vision',  note: 'Worked on CV pipelines at NAID (National Academy for IT) — a government accessibility-focused institution.' },
+      { name: 'OpenCV',           note: 'Image preprocessing, edge detection, contour analysis, real-time video frame processing.' },
       { name: 'Image Processing', note: 'Noise reduction, thresholding, morphological operations, color space transformations.' },
-      { name: 'Python ML',       note: 'Exploratory ML with scikit-learn, NumPy, and Pandas — classification and regression experiments.' },
-      { name: 'NumPy',           note: 'Matrix operations, vectorized computation — core dependency for all CV and ML work.' },
+      { name: 'Python ML',        note: 'Exploratory ML with scikit-learn, NumPy, and Pandas — classification and regression experiments.' },
+      { name: 'NumPy',            note: 'Matrix operations, vectorized computation — core dependency for all CV and ML work.' },
     ],
   },
 ]
@@ -175,8 +182,7 @@ export default function Skills() {
                 {cat.skills.map((skill) => (
                   <div
                     key={skill.name}
-                    className="group flex flex-col gap-1 border border-[#1e2235] rounded-lg px-4 py-3 hover:border-opacity-60 transition-all duration-200"
-                    style={{ ['--hover-color' as string]: cat.color }}
+                    className="flex flex-col gap-1 border border-[#1e2235] rounded-lg px-4 py-3 transition-all duration-200"
                     onMouseEnter={e => (e.currentTarget.style.borderColor = `${cat.color}44`)}
                     onMouseLeave={e => (e.currentTarget.style.borderColor = '#1e2235')}
                   >
