@@ -1,14 +1,11 @@
 import { useRef, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
+import emailjs from 'emailjs-com'
 
-// ─── EmailJS via CDN (no npm needed) ──────────────────────────────────────────
-// Add this to your index.html <head>:
-// <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-// <script>emailjs.init("YOUR_PUBLIC_KEY")</script>
-// OR install: npm install @emailjs/browser
-// Then replace sendEmail() with the real call shown below
-// ─────────────────────────────────────────────────────────────────────────────
+const SERVICE_ID  = 'service_218aoh9'
+const TEMPLATE_ID = 'template_clm8nwi'
+const PUBLIC_KEY  = '1N5NqInKsEjA9_V6z'
 
 const SOCIALS = [
   {
@@ -73,51 +70,36 @@ export default function Contact() {
   const formRef = useRef<HTMLFormElement>(null)
   const [status, setStatus] = useState<FormState>('idle')
   const [form, setForm] = useState({ name: '', email: '', message: '' })
+  const [errorMsg, setErrorMsg] = useState('')
 
   useGSAP(() => {
-    gsap.from('.c-h',     { y: 50, opacity: 0, stagger: 0.08, duration: 0.8, ease: 'power3.out' })
-    gsap.from('.c-social',{ x: 40, opacity: 0, stagger: 0.1,  duration: 0.7, delay: 0.3, ease: 'power3.out' })
-    gsap.from('.c-form',  { x: -40, opacity: 0, duration: 0.7, delay: 0.2, ease: 'power3.out' })
+    gsap.from('.c-h',      { y: 50, opacity: 0, stagger: 0.08, duration: 0.8, ease: 'power3.out' })
+    gsap.from('.c-social', { x: 40, opacity: 0, stagger: 0.1,  duration: 0.7, delay: 0.3, ease: 'power3.out' })
+    gsap.from('.c-form',   { x: -40, opacity: 0, duration: 0.7, delay: 0.2,  ease: 'power3.out' })
   }, { scope: ref })
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!form.name || !form.email || !form.message) return
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) return
     setStatus('sending')
+    setErrorMsg('')
 
     try {
-      // ── OPTION 1: EmailJS (recommended, free) ──────────────────────────
-      // 1. Go to https://emailjs.com → sign up free
-      // 2. Add Email Service (Gmail) → copy SERVICE_ID
-      // 3. Create Email Template → copy TEMPLATE_ID
-      //    Template variables: {{from_name}}, {{from_email}}, {{message}}
-      // 4. Copy your PUBLIC_KEY from Account → API Keys
-      // 5. Run: npm install @emailjs/browser
-      // 6. Uncomment the block below and fill in your IDs:
-      //
-      // import emailjs from '@emailjs/browser'
-      // await emailjs.sendForm(
-      //   'YOUR_SERVICE_ID',
-      //   'YOUR_TEMPLATE_ID',
-      //   formRef.current!,
-      //   'YOUR_PUBLIC_KEY'
-      // )
-      //
-      // ── OPTION 2: Formspree (even simpler, zero code) ─────────────────
-      // 1. Go to https://formspree.io → create form → get endpoint
-      // 2. Replace the fetch below with your endpoint:
-      const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ name: form.name, email: form.email, message: form.message }),
-      })
-      if (res.ok) {
-        setStatus('sent')
-        setForm({ name: '', email: '', message: '' })
-      } else {
-        setStatus('error')
-      }
-    } catch {
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          name:    form.name,
+          email:   form.email,
+          message: form.message,
+        },
+        PUBLIC_KEY
+      )
+      setStatus('sent')
+      setForm({ name: '', email: '', message: '' })
+    } catch (err: unknown) {
+      console.error('EmailJS error:', err)
+      setErrorMsg('Something went wrong. Email me directly at saiflotfy26@gmail.com')
       setStatus('error')
     }
   }
@@ -134,7 +116,7 @@ export default function Contact() {
           </h1>
           <p className="text-[#4b5563] text-sm leading-relaxed max-w-xs">
             Open to full-time roles, freelance projects, internships, and collaborations.
-            Based in Cairo — available remotely worldwide.
+            Based in Cairo &mdash; available remotely worldwide.
           </p>
         </div>
 
@@ -153,35 +135,33 @@ export default function Contact() {
                     </svg>
                   </div>
                   <div className="text-center">
-                    <p className="text-white font-bold text-lg mb-2">Message sent!</p>
-                    <p className="text-[#4b5563] text-sm">I’ll get back to you soon.</p>
+                    <p className="text-white font-bold text-lg mb-2">Message sent! ✉️</p>
+                    <p className="text-[#4b5563] text-sm">I&apos;ll get back to you as soon as possible.</p>
                   </div>
                   <button
                     onClick={() => setStatus('idle')}
                     className="text-[10px] tracking-[0.3em] uppercase text-[#374151] hover:text-[#7c6aff] transition-colors mt-2"
                   >
-                    Send another
+                    Send another →
                   </button>
                 </div>
               ) : (
-                <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-6">
+                <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-6" noValidate>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="flex flex-col gap-2">
-                      <label className="text-[9px] tracking-[0.4em] uppercase text-[#374151]">Name</label>
+                      <label className="text-[9px] tracking-[0.4em] uppercase text-[#374151]">Name *</label>
                       <input
-                        name="from_name"
                         type="text"
                         required
                         value={form.name}
                         onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
-                        placeholder="Saif Lotfy"
+                        placeholder="Your name"
                         className="bg-[#0d0f14] border border-[#1e2235] text-[#e8eaf0] text-sm px-4 py-3.5 rounded-lg focus:outline-none focus:border-[#7c6aff] transition-colors placeholder-[#1e2235]"
                       />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <label className="text-[9px] tracking-[0.4em] uppercase text-[#374151]">Email</label>
+                      <label className="text-[9px] tracking-[0.4em] uppercase text-[#374151]">Email *</label>
                       <input
-                        name="from_email"
                         type="email"
                         required
                         value={form.email}
@@ -193,9 +173,8 @@ export default function Contact() {
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <label className="text-[9px] tracking-[0.4em] uppercase text-[#374151]">Message</label>
+                    <label className="text-[9px] tracking-[0.4em] uppercase text-[#374151]">Message *</label>
                     <textarea
-                      name="message"
                       rows={6}
                       required
                       value={form.message}
@@ -206,15 +185,15 @@ export default function Contact() {
                   </div>
 
                   {status === 'error' && (
-                    <p className="text-[#ef4444] text-xs tracking-wide">
-                      ⚠ Something went wrong. Please email me directly at saiflotfy26@gmail.com
+                    <p className="text-[#ef4444] text-xs tracking-wide flex items-center gap-2">
+                      <span>⚠</span> {errorMsg}
                     </p>
                   )}
 
                   <button
                     type="submit"
                     disabled={status === 'sending'}
-                    className="relative overflow-hidden bg-[#7c6aff] text-white text-[11px] tracking-[0.3em] uppercase font-bold py-4 rounded-lg hover:bg-[#6c5ce7] transition-all duration-300 disabled:opacity-60 flex items-center justify-center gap-3"
+                    className="relative overflow-hidden bg-[#7c6aff] text-white text-[11px] tracking-[0.3em] uppercase font-bold py-4 rounded-lg hover:bg-[#6c5ce7] active:scale-[0.98] transition-all duration-300 disabled:opacity-60 flex items-center justify-center gap-3"
                   >
                     {status === 'sending' ? (
                       <>
@@ -236,9 +215,8 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* ── RIGHT: Social cards ── */}
+          {/* ── RIGHT: Socials ── */}
           <div className="lg:col-span-2 flex flex-col gap-4">
-
             <p className="text-[10px] tracking-[0.4em] uppercase text-[#272d42] mb-2">Find Me On</p>
 
             {SOCIALS.map((s) => (
@@ -256,27 +234,22 @@ export default function Contact() {
                   {s.icon}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-white text-sm font-semibold mb-0.5 group-hover:text-[#a78bfa] transition-colors">
-                    {s.label}
-                  </p>
+                  <p className="text-white text-sm font-semibold mb-0.5 group-hover:text-[#a78bfa] transition-colors">{s.label}</p>
                   <p className="text-[#4b5563] text-xs truncate">{s.handle}</p>
                   <p className="text-[#272d42] text-[10px] mt-0.5">{s.desc}</p>
                 </div>
-                <svg
-                  width="14" height="14" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                  className="text-[#1e2235] group-hover:text-[#7c6aff] transition-colors flex-shrink-0"
-                >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                  className="text-[#1e2235] group-hover:text-[#7c6aff] transition-colors flex-shrink-0">
                   <path d="M7 17 17 7M7 7h10v10"/>
                 </svg>
               </a>
             ))}
 
-            {/* Resume download */}
+            {/* Resume */}
             <a
               href="/Saif-Lotfy_CV.pdf"
               download="Saif-Lotfy_CV.pdf"
-              className="cv-btn mt-2 group flex items-center justify-center gap-3 border border-[#7c6aff]/30 bg-[#7c6aff]/5 text-[#a78bfa] text-[11px] tracking-[0.3em] uppercase font-bold py-4 rounded-xl hover:bg-[#7c6aff] hover:text-white hover:border-[#7c6aff] transition-all duration-300"
+              className="mt-2 group flex items-center justify-center gap-3 border border-[#7c6aff]/30 bg-[#7c6aff]/5 text-[#a78bfa] text-[11px] tracking-[0.3em] uppercase font-bold py-4 rounded-xl hover:bg-[#7c6aff] hover:text-white hover:border-[#7c6aff] transition-all duration-300"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -286,18 +259,18 @@ export default function Contact() {
               Download Resume
             </a>
 
-            {/* Availability badge */}
+            {/* Availability */}
             <div className="mt-2 flex items-center gap-3 px-5 py-4 rounded-xl border border-[#1e2235]">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#22c55e] opacity-75" />
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#22c55e]" />
               </span>
               <span className="text-[11px] tracking-[0.25em] uppercase text-[#4b5563]">
-                Available for work — Cairo / Remote
+                Available for work &mdash; Cairo / Remote
               </span>
             </div>
-
           </div>
+
         </div>
       </div>
     </section>
