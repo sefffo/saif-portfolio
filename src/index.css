@@ -3,17 +3,28 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:        #0d0f14;
-  --surface:   #12151d;
-  --surface2:  #161a24;
-  --fg:        #e8eaf0;
-  --muted:     #6b7280;
-  --dim:       #374151;
-  --accent:    #7c6aff;
-  --accent2:   #a78bfa;
-  --glow:      #7c6aff44;
-  --border:    #1e2235;
-  --border2:   #272d42;
+  /* ── Midnight Violet palette ───────────────────────────────────────────────
+     bg/surface: deeper blue-black (not flat grey)
+     fg:         bright #f4f1ff — warm white with the slightest violet tint,
+                 much higher contrast than the old #e8eaf0
+     body text:  #c9c4e0 — readable lavender-white for paragraphs
+     muted:      #7c7899 — visible, not invisible
+     dim:        #4e4a6a — used for labels / section numbers
+     accent:     #8b7cf8 — slightly softer violet (less neon)
+     accent2:    #c4b5fd — light lavender for highlights
+  ─────────────────────────────────────────────────────────────────────────── */
+  --bg:         #0a0a0f;
+  --surface:    #111118;
+  --surface2:   #17172200;
+  --fg:         #f4f1ff;
+  --body:       #c9c4e0;
+  --muted:      #7c7899;
+  --dim:        #4e4a6a;
+  --accent:     #8b7cf8;
+  --accent2:    #c4b5fd;
+  --glow:       #8b7cf844;
+  --border:     #1e1c30;
+  --border2:    #2c2a45;
   --nav-height: 72px;
 }
 
@@ -24,6 +35,11 @@ body {
   color: var(--fg);
   font-family: 'Inter', system-ui, sans-serif;
   overflow-x: hidden;
+}
+
+/* Paragraphs and body copy use --body so they're readable but not blinding */
+p, li, span:not(.grad-text):not(.section-label) {
+  color: inherit;
 }
 
 .font-display { font-family: 'Syne', sans-serif; }
@@ -54,7 +70,7 @@ body {
 }
 .nav-link:hover        { color: var(--fg); }
 .nav-link:hover::after { width: 100%; }
-.nav-link.active       { color: #fff; }
+.nav-link.active       { color: var(--fg); }
 .nav-link.active::after{ width: 100%; }
 
 /* Page top padding to clear fixed nav */
@@ -110,13 +126,13 @@ body {
 
 /* Gradient text */
 .grad-text {
-  background: linear-gradient(135deg, #a78bfa, #7c6aff);
+  background: linear-gradient(135deg, #c4b5fd, #8b7cf8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Skill pill — no GSAP initial hidden state, all visible by default */
+/* Skill pill */
 .skill-pill {
   display: inline-flex;
   align-items: center;
@@ -154,12 +170,12 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   border: 1px solid var(--border2);
-  color: var(--dim);
+  color: var(--muted);
   padding: 5px 10px;
   border-radius: 4px;
   transition: border-color 0.2s, color 0.2s;
 }
-.tag:hover { border-color: var(--accent); color: var(--accent); }
+.tag:hover { border-color: var(--accent); color: var(--accent2); }
 
 /* Marquee */
 .marquee-track {
@@ -184,7 +200,7 @@ body {
 .glow-line {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  opacity: 0.15;
+  opacity: 0.2;
 }
 
 /* Proficiency bar */
@@ -192,8 +208,8 @@ body {
   position: absolute;
   left: 0; top: 0; bottom: 0;
   border-radius: 9999px;
-  background: linear-gradient(90deg, #7c6aff, #a78bfa);
-  box-shadow: 0 0 8px #7c6aff55;
+  background: linear-gradient(90deg, #8b7cf8, #c4b5fd);
+  box-shadow: 0 0 8px #8b7cf855;
 }
 
 /* Hero floating chip */
