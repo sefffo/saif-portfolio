@@ -10,60 +10,107 @@ const categories = [
   {
     label: 'Languages',
     color: '#a78bfa',
-    skills: ['C', 'C++', 'C# 13', 'JavaScript', 'TypeScript', 'Python', 'SQL / T-SQL', 'HTML', 'CSS', 'SCSS'],
+    desc: 'Core programming languages I write daily or use in specific domains.',
+    skills: [
+      { name: 'C# 13',       note: 'Primary language — production .NET 9 backends, microservices, APIs, and everything in between.' },
+      { name: 'TypeScript',  note: 'Strict typing, generics, advanced type inference — used across Angular and NestJS projects.' },
+      { name: 'JavaScript',  note: 'ES2024+, async/await, closures — used across Angular, React, and Node.js.' },
+      { name: 'SQL / T-SQL', note: 'Complex joins, stored procedures, CTEs, window functions, execution plan analysis.' },
+      { name: 'Python',      note: 'Computer Vision (OpenCV), ML experiments, scripting, and academic simulation projects.' },
+      { name: 'C++',         note: 'DSA, ICPC competitive programming, OOP and STL — my CS foundations were built here.' },
+      { name: 'C',           note: 'Low-level memory, pointers, and systems programming from early university coursework.' },
+      { name: 'HTML / CSS',  note: 'Semantic markup, accessibility, CSS grid/flexbox, custom properties, SCSS for structured styling.' },
+    ],
   },
   {
     label: 'Backend & .NET',
     color: '#7c6aff',
+    desc: 'The core of what I do — building scalable, production-ready server-side systems.',
     skills: [
-      '.NET 9', 'ASP.NET Core', 'ASP.NET MVC', 'ASP.NET Web API',
-      'Entity Framework Core', 'ADO.NET', 'LINQ',
-      'AutoMapper', 'FluentValidation', 'Serilog',
-      'RESTful APIs', 'SignalR', 'WebSockets',
-      'JWT', 'OAuth2', 'Google OAuth2',
-      'Node.js', 'Express.js', 'NestJS',
-      'Clean Architecture', 'Microservices Architecture',
-      'Repository Pattern', 'Unit of Work', 'Specification Pattern',
+      { name: '.NET 9 / ASP.NET Core',     note: 'Minimal APIs, Web API controllers, middleware, DI container, filters, background services.' },
+      { name: 'Clean Architecture',         note: 'Domain → Application → Infrastructure → API layers. Every project I build follows this structure.' },
+      { name: 'Microservices Architecture', note: 'Contributed 50%+ of Code Way LMS services. API Gateway, service discovery, inter-service HTTP/messaging.' },
+      { name: 'Entity Framework Core',      note: 'Code-First, complex migrations, LINQ queries, interceptors, seeding — used daily in production.' },
+      { name: 'Repository + Unit of Work',  note: 'Abstraction layers for data access, enabling testability and clean separation of concerns.' },
+      { name: 'SignalR / WebSockets',        note: 'Real-time hubs for live notifications, dashboards, and chat features in production apps.' },
+      { name: 'JWT / OAuth2 / Google',      note: 'Full auth flows — access/refresh tokens, role claims, PKCE, identity federation via Google OAuth2.' },
+      { name: 'Node.js / NestJS',           note: 'REST APIs, async I/O, dependency injection in NestJS — used as a secondary backend runtime.' },
+      { name: 'AutoMapper / FluentVal',     note: 'DTO mapping and input validation — clean, declarative, decoupled from business logic.' },
+      { name: 'Serilog',                    note: 'Structured logging with sinks (console, file, seq) for observability in production services.' },
+      { name: 'RESTful API Design',         note: 'Versioning, HATEOAS concepts, proper HTTP semantics, Swagger/OpenAPI documentation.' },
+      { name: 'ADO.NET / LINQ',             note: 'Raw SQL for performance-critical queries, LINQ for expressive in-code data manipulation.' },
     ],
   },
   {
     label: 'Databases',
     color: '#06b6d4',
-    skills: ['SQL Server', 'MongoDB', 'Redis', 'PostgreSQL', 'EF Core Migrations', 'LINQ Queries', 'Stored Procedures'],
+    desc: 'Data persistence, caching, and query optimization across relational and NoSQL stores.',
+    skills: [
+      { name: 'SQL Server',         note: 'Primary relational DB — schema design, indexes, execution plans, EF migrations, stored procedures.' },
+      { name: 'PostgreSQL',         note: 'Advanced queries, JSONB columns, CTEs, full-text search, and constraint-based design.' },
+      { name: 'MongoDB',            note: 'Document store for flexible schemas — LMS/CMS content, aggregation pipelines, Atlas queries.' },
+      { name: 'Redis',              note: 'In-memory caching for hot-path acceleration, session storage, and pub/sub patterns.' },
+      { name: 'EF Core Migrations', note: 'Schema evolution strategy — incremental, reversible migrations across all .NET projects.' },
+      { name: 'Stored Procedures',  note: 'T-SQL procedures for complex batch logic, reporting queries, and legacy integration.' },
+    ],
   },
   {
     label: 'Frontend',
     color: '#f59e0b',
+    desc: 'Building responsive, reactive UIs — backend-first but fully capable end-to-end.',
     skills: [
-      'Angular 17', 'RxJS', 'NgRx', 'Signals', 'Interceptors', 'Lazy Loading',
-      'Angular Material', 'Bootstrap', 'Tailwind CSS', 'Flowbite',
-      'React', 'React Router', 'TypeScript',
+      { name: 'Angular 17+',       note: 'Primary frontend — RxJS, NgRx state, Signals, standalone components, lazy-loaded modules.' },
+      { name: 'RxJS / NgRx',       note: 'Reactive streams, complex async orchestration, global state management with NgRx Store.' },
+      { name: 'React',             note: 'Hooks, Context, React Router v7, Three.js / R3F — used for this portfolio.' },
+      { name: 'TypeScript (FE)',   note: 'Strict types across all frontend work — interfaces, generics, discriminated unions.' },
+      { name: 'Tailwind CSS',      note: 'Utility-first styling — rapid UI, responsive layouts, design tokens, dark mode.' },
+      { name: 'Angular Material',  note: 'Component library for production Angular apps — theming, accessibility, form controls.' },
+      { name: 'Bootstrap',         note: 'Grid system and utility classes for rapid prototyping and legacy project work.' },
+      { name: 'HTTP Interceptors', note: 'Token injection, error handling, retry logic, and loading state in Angular apps.' },
     ],
   },
   {
     label: 'CS Fundamentals & Architecture',
     color: '#ec4899',
+    desc: 'The theoretical and design foundations that inform every system I build.',
     skills: [
-      'OOP', 'Functional Programming',
-      'Data Structures', 'Algorithms', 'Complexity Analysis',
-      'SOLID Principles', 'Design Patterns', 'DDD', 'System Design',
-      'Competitive Programming (ICPC)',
+      { name: 'OOP',                    note: 'Encapsulation, inheritance, polymorphism, abstraction — applied in every C# and TypeScript project.' },
+      { name: 'SOLID Principles',        note: 'SRP, OCP, LSP, ISP, DIP — the lens through which I evaluate and review all architecture decisions.' },
+      { name: 'Design Patterns',         note: 'Repository, Unit of Work, Specification, Factory, Strategy, Observer — applied contextually, not dogmatically.' },
+      { name: 'Data Structures',         note: 'Arrays, trees, graphs, heaps, tries — deeply practiced through ICPC and LeetCode.' },
+      { name: 'Algorithms & Complexity', note: 'Sorting, searching, dynamic programming, greedy, graph traversal — O(n) analysis fluency.' },
+      { name: 'DDD',                     note: 'Domain-Driven Design concepts — aggregates, value objects, bounded contexts in microservice design.' },
+      { name: 'System Design',           note: 'Scalability tradeoffs, load balancing, caching layers, message queues, DB sharding concepts.' },
+      { name: 'Competitive Programming', note: 'ICPC 2024 competitor — timed algorithm challenges, team problem-solving under pressure.' },
     ],
   },
   {
     label: 'Tools, DevOps & SDLC',
     color: '#22c55e',
+    desc: 'Everything from code to deployment — CI/CD, project management, and team collaboration.',
     skills: [
-      'Git', 'GitHub', 'GitHub Actions',
-      'Jenkins', 'Docker', 'Postman',
-      'Jira', 'Slack', 'Swagger / OpenAPI',
-      'Agile', 'Scrum', 'SDLC', 'DevOps',
+      { name: 'Git / GitHub',       note: 'Branching strategies, rebase, cherry-pick, PR reviews, conflict resolution — daily driver.' },
+      { name: 'GitHub Actions',     note: 'CI/CD pipelines for automated build, test, and deploy workflows on push/PR.' },
+      { name: 'Jenkins',            note: 'Jenkins pipelines for the Uni Portal project — staging and production automation.' },
+      { name: 'Docker',             note: 'Containerized all microservices — Docker Compose for local full-stack orchestration.' },
+      { name: 'Jira',               note: 'Sprint planning, backlog grooming, task delegation as Team Lead on the National Uni Portal.' },
+      { name: 'Postman',            note: 'API testing, collection management, environment variables, pre-request scripting.' },
+      { name: 'Swagger / OpenAPI',  note: 'Auto-generated interactive API docs — versioned, annotated, and shared with frontend teams.' },
+      { name: 'Agile / Scrum',      note: 'Sprint ceremonies, velocity tracking, retrospectives — practiced daily in team lead role.' },
+      { name: 'Slack',              note: 'Async team communication, channel organization, integration with CI/CD notifications.' },
     ],
   },
   {
     label: 'AI & Computer Vision',
     color: '#f97316',
-    skills: ['Computer Vision', 'Image Processing', 'Python ML', 'NumPy', 'OpenCV'],
+    desc: 'Applied ML and CV work from my internship at NAID and personal research.',
+    skills: [
+      { name: 'Computer Vision', note: 'Worked on CV pipelines at NAID (National Academy for IT) — a government accessibility-focused institution.' },
+      { name: 'OpenCV',          note: 'Image preprocessing, edge detection, contour analysis, real-time video frame processing.' },
+      { name: 'Image Processing', note: 'Noise reduction, thresholding, morphological operations, color space transformations.' },
+      { name: 'Python ML',       note: 'Exploratory ML with scikit-learn, NumPy, and Pandas — classification and regression experiments.' },
+      { name: 'NumPy',           note: 'Matrix operations, vectorized computation — core dependency for all CV and ML work.' },
+    ],
   },
 ]
 
@@ -80,7 +127,7 @@ export default function Skills() {
   }, { scope: ref })
 
   return (
-    <section ref={ref} className="page-wrapper pb-28 page-enter">
+    <section ref={ref} className="page-wrapper pb-40 page-enter">
       <div className="max-w-7xl mx-auto pt-16">
 
         <p className="sk-h section-label mb-4">002 / Skills</p>
@@ -97,31 +144,51 @@ export default function Skills() {
           <SkillKeyboard />
         </div>
 
-        {/* ── CATEGORY PILLS ── */}
+        {/* ── CATEGORY BREAKDOWN ── */}
         <p className="section-label mb-10">Full Breakdown</p>
-        <div className="cats-section flex flex-col gap-12">
+        <div className="cats-section flex flex-col gap-16">
           {categories.map((cat) => (
             <div key={cat.label} className="cat-block">
-              <div className="flex items-center gap-3 mb-5">
+
+              {/* Category header */}
+              <div className="flex items-start gap-3 mb-2">
                 <span
-                  className="w-2 h-2 rounded-full flex-shrink-0"
+                  className="mt-1.5 w-2 h-2 rounded-full flex-shrink-0"
                   style={{ background: cat.color, boxShadow: `0 0 10px ${cat.color}88` }}
                 />
-                <span
-                  className="text-[11px] tracking-[0.35em] uppercase font-semibold"
-                  style={{ color: cat.color }}
-                >
-                  {cat.label}
-                </span>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {cat.skills.map((skill) => (
-                  <span key={skill} className="skill-pill">
-                    <span className="dot" style={{ background: cat.color }} />
-                    {skill}
+                <div>
+                  <span
+                    className="block text-[11px] tracking-[0.35em] uppercase font-semibold mb-1"
+                    style={{ color: cat.color }}
+                  >
+                    {cat.label}
                   </span>
+                  <p className="text-[#4b5563] text-xs leading-relaxed max-w-2xl">{cat.desc}</p>
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div className="ml-5 mb-6 h-px" style={{ background: `linear-gradient(90deg, ${cat.color}33, transparent)` }} />
+
+              {/* Skills grid */}
+              <div className="ml-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {cat.skills.map((skill) => (
+                  <div
+                    key={skill.name}
+                    className="group flex flex-col gap-1 border border-[#1e2235] rounded-lg px-4 py-3 hover:border-opacity-60 transition-all duration-200"
+                    style={{ ['--hover-color' as string]: cat.color }}
+                    onMouseEnter={e => (e.currentTarget.style.borderColor = `${cat.color}44`)}
+                    onMouseLeave={e => (e.currentTarget.style.borderColor = '#1e2235')}
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: cat.color }} />
+                      <span className="text-white text-xs font-semibold">{skill.name}</span>
+                    </div>
+                    <p className="text-[#4b5563] text-[11px] leading-[1.7] pl-3">{skill.note}</p>
+                  </div>
                 ))}
               </div>
+
             </div>
           ))}
         </div>

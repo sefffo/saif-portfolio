@@ -70,20 +70,18 @@ function Key3D({ skill, isActive, onEnter, onLeave }: {
   onEnter: () => void
   onLeave: () => void
 }) {
-  const size = skill.widePx ?? 60
-
   return (
     <div
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       className="relative cursor-default select-none flex-shrink-0"
       style={{
-        width: size,
-        height: 60,
+        width: skill.widePx ? skill.widePx : undefined,
+        minWidth: skill.widePx ? skill.widePx : 48,
+        height: 52,
         perspective: 300,
       }}
     >
-      {/* Cap face */}
       <div
         className="absolute inset-0 rounded-lg flex flex-col items-center justify-center gap-1 transition-all duration-100"
         style={{
@@ -92,7 +90,7 @@ function Key3D({ skill, isActive, onEnter, onLeave }: {
             : `linear-gradient(145deg, ${skill.bg}dd, ${skill.bg}99)`,
           boxShadow: isActive
             ? `0 2px 0 rgba(0,0,0,0.5), 0 0 20px ${skill.bg}88, inset 0 1px 0 rgba(255,255,255,0.3)`
-            : `0 6px 0 rgba(0,0,0,0.5), 0 8px 0 rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2)`,
+            : `0 5px 0 rgba(0,0,0,0.5), 0 7px 0 rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2)`,
           transform: isActive ? 'translateY(4px) rotateX(5deg)' : 'translateY(0) rotateX(0deg)',
           border: isActive ? `1px solid ${skill.bg}` : '1px solid rgba(255,255,255,0.08)',
         }}
@@ -100,12 +98,12 @@ function Key3D({ skill, isActive, onEnter, onLeave }: {
         <img
           src={skill.icon}
           alt={skill.label}
-          className="w-6 h-6 object-contain"
+          className="w-5 h-5 object-contain"
           style={{ filter: skill.color === '#fff' ? 'brightness(1)' : 'none' }}
           onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
         />
         <span
-          className="text-[8px] font-bold leading-none text-center px-1"
+          className="text-[7px] font-bold leading-none text-center px-0.5"
           style={{ color: skill.color }}
         >
           {skill.label}
@@ -161,84 +159,87 @@ export default function SkillKeyboard() {
         )}
       </div>
 
-      {/* 3D board wrapper — perspective */}
-      <div
-        className="flex justify-center"
-        style={{ perspective: '1000px', perspectiveOrigin: '50% 40%' }}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-      >
+      {/* Keyboard — scrollable on small screens */}
+      <div className="w-full overflow-x-auto pb-4 -mb-4">
         <div
-          ref={boardRef}
-          className="relative rounded-2xl p-6 transition-transform duration-300 ease-out"
-          style={{
-            background: 'linear-gradient(145deg, #1a1c24, #0d0f14)',
-            boxShadow: '0 40px 80px rgba(0,0,0,0.7), 0 15px 0 #080a0e, 0 20px 0 #060708, inset 0 1px 0 #2a2d3a',
-            border: '1px solid #1e2235',
-            transform: 'rotateY(-8deg) rotateX(12deg)',
-            transformStyle: 'preserve-3d',
-            width: 'fit-content',
-          }}
+          className="flex justify-center"
+          style={{ perspective: '1000px', perspectiveOrigin: '50% 40%', minWidth: 560 }}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
         >
-          {/* Top surface highlight */}
-          <div className="absolute inset-x-6 top-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, #2a2d3a, transparent)' }} />
+          <div
+            ref={boardRef}
+            className="relative rounded-2xl p-5 transition-transform duration-300 ease-out"
+            style={{
+              background: 'linear-gradient(145deg, #1a1c24, #0d0f14)',
+              boxShadow: '0 40px 80px rgba(0,0,0,0.7), 0 15px 0 #080a0e, 0 20px 0 #060708, inset 0 1px 0 #2a2d3a',
+              border: '1px solid #1e2235',
+              transform: 'rotateY(-8deg) rotateX(12deg)',
+              transformStyle: 'preserve-3d',
+              width: 'fit-content',
+            }}
+          >
+            {/* Top surface highlight */}
+            <div className="absolute inset-x-6 top-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, #2a2d3a, transparent)' }} />
 
-          {/* LED row */}
-          <div className="flex justify-end gap-1.5 mb-5">
-            {['#7c6aff','#3b82f6','#22c55e','#f59e0b','#ef4444','#ec4899'].map(c => (
-              <div key={c} className="w-2 h-2 rounded-full"
-                style={{ background: c, boxShadow: `0 0 8px ${c}, 0 0 16px ${c}55` }}
-              />
-            ))}
-          </div>
-
-          {/* Keys */}
-          <div className="flex flex-col gap-3">
-            {ROWS.map((row, ri) => (
-              <div key={ri}>
-                <p className="text-[7px] tracking-[0.4em] uppercase mb-2 pl-0.5"
-                  style={{ color: '#2a2d3a' }}>{ROW_LABELS[ri]}
-                </p>
-                <div className="flex gap-2">
-                  {row.map(id => {
-                    const skill = KEY_MAP[id]
-                    if (!skill) return null
-                    return (
-                      <Key3D
-                        key={id}
-                        skill={skill}
-                        isActive={active?.id === id}
-                        onEnter={() => setActive(skill)}
-                        onLeave={() => setActive(null)}
-                      />
-                    )
-                  })}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Spacebar area */}
-          <div className="mt-3 flex items-center gap-2">
-            <div
-              className="h-8 flex-1 rounded-lg flex items-center justify-center"
-              style={{
-                background: 'linear-gradient(145deg, #1e2235, #161824)',
-                boxShadow: '0 4px 0 rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)',
-                border: '1px solid #2a2d3a',
-              }}
-            >
-              <span className="text-[8px] tracking-[0.5em] uppercase text-[#2a2d3a]">saif lotfy</span>
+            {/* LED row */}
+            <div className="flex justify-end gap-1.5 mb-4">
+              {['#7c6aff','#3b82f6','#22c55e','#f59e0b','#ef4444','#ec4899'].map(c => (
+                <div key={c} className="w-2 h-2 rounded-full"
+                  style={{ background: c, boxShadow: `0 0 8px ${c}, 0 0 16px ${c}55` }}
+                />
+              ))}
             </div>
-          </div>
 
-          {/* Bottom brand */}
-          <div className="mt-3 flex justify-between items-center px-1">
-            <span className="text-[7px] tracking-[0.3em] uppercase text-[#1e2235]">TECH STACK v2</span>
-            <span className="text-[7px] tracking-[0.3em] uppercase text-[#1e2235]">.NET BACKEND</span>
+            {/* Keys */}
+            <div className="flex flex-col gap-2.5">
+              {ROWS.map((row, ri) => (
+                <div key={ri}>
+                  <p className="text-[7px] tracking-[0.4em] uppercase mb-1.5 pl-0.5"
+                    style={{ color: '#2a2d3a' }}>{ROW_LABELS[ri]}
+                  </p>
+                  <div className="flex gap-1.5">
+                    {row.map(id => {
+                      const skill = KEY_MAP[id]
+                      if (!skill) return null
+                      return (
+                        <Key3D
+                          key={id}
+                          skill={skill}
+                          isActive={active?.id === id}
+                          onEnter={() => setActive(skill)}
+                          onLeave={() => setActive(null)}
+                        />
+                      )
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Spacebar */}
+            <div className="mt-2.5 flex items-center gap-2">
+              <div
+                className="h-7 flex-1 rounded-lg flex items-center justify-center"
+                style={{
+                  background: 'linear-gradient(145deg, #1e2235, #161824)',
+                  boxShadow: '0 4px 0 rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)',
+                  border: '1px solid #2a2d3a',
+                }}
+              >
+                <span className="text-[8px] tracking-[0.5em] uppercase text-[#2a2d3a]">saif lotfy</span>
+              </div>
+            </div>
+
+            {/* Bottom brand */}
+            <div className="mt-2.5 flex justify-between items-center px-1">
+              <span className="text-[7px] tracking-[0.3em] uppercase text-[#1e2235]">TECH STACK v2</span>
+              <span className="text-[7px] tracking-[0.3em] uppercase text-[#1e2235]">.NET BACKEND</span>
+            </div>
           </div>
         </div>
       </div>
+
     </div>
   )
 }
