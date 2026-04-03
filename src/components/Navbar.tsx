@@ -53,8 +53,8 @@ export default function Navbar() {
 
           {/* Desktop CV button */}
           <a
-            href="/Saif%20Lotfy_CV.pdf"
-            download="Saif-Lotfy_CV.pdf"
+            href="/Saif_Lotfy_CV.pdf"
+            download="Saif_Lotfy_CV.pdf"
             className="cv-btn hidden md:flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase bg-[#7c6aff] text-white px-5 py-2.5 font-semibold hover:bg-[#6c5ce7] transition-colors duration-300 rounded flex-shrink-0"
           >
             <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
@@ -105,8 +105,8 @@ export default function Navbar() {
 
           {/* Download button — right below nav links */}
           <a
-            href="/Saif%20Lotfy_CV.pdf"
-            download="Saif-Lotfy_CV.pdf"
+            href="/Saif_Lotfy_CV.pdf"
+            download="Saif_Lotfy_CV.pdf"
             onClick={() => setMenuOpen(false)}
             className="mt-2 bg-[#7c6aff] text-white text-sm tracking-[0.2em] uppercase px-6 py-5 text-center font-semibold w-full rounded-xl hover:bg-[#6c5ce7] transition-colors duration-300 flex items-center justify-center gap-3"
           >
